@@ -127,7 +127,7 @@ var calculatorModule = (function(){
   };
 
 
-})();
+});
 
 module.exports = {
   calculatorModule
