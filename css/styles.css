@@ -12,6 +12,7 @@ body {
 .panel{
   padding-left: 10px;
   font-size: 36px;
+  font-family: 'Inconsolata', monospace;
 }
 
 .row {
