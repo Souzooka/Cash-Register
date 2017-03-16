@@ -27,7 +27,6 @@ var cashRegisterModule = (function (){
   }
 
   return {
-    setDisplayElement,
     getDollars,
     getCents,
     addMoney,
