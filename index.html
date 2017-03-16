@@ -117,10 +117,13 @@ window.onload = function() {
       displayDollars = String((Math.floor(money)));
       displayCents = String((money - Math.floor(money)) * 100);
     } else {
-      negative = "-";
+      if (money > -1 && money < 0) {
+        negative = "-";
+      }
       displayDollars = String((Math.ceil(money)));
       displayCents = String(Math.abs((money - Math.floor(money)) * 100 - 100));
     }
+    displayCents = Math.round(displayCents);
     if (displayCents < 10) {
       displayCents = "0" + String(displayCents);
     }
