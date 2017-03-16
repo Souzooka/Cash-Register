@@ -102,70 +102,100 @@ window.onload = function() {
   var calculatorDollars = calculatorModule();
   var cashRegister = cashRegisterModule();
   var display = document.getElementById("registerDisplay");
-  var displayDollars = 0;
-  var displayCents = 0;
+  var displayDollars = "0";
+  var displayCents = "00";
   var decimal = false;
+  var decimalIndex = 0;
   cashRegister.setDisplayElement(display);
 
+
   function checkLeadingNumbers() {
-    if (display.innerHTML.search(/\./) !== -1 && display.innerHTML.length - display.innerHTML.search(/\./) >= 3) {
+    if (decimalIndex > 1) {
       return false;
     } else {
       return true;
     }
+  }
 
+  function updateDisplay(numStr) {
+
+    if (decimal && checkLeadingNumbers()) {
+      displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
+      if (numStr === "0" && decimalIndex <= 1) {
+        decimalIndex++;
+      }
+      else if (numStr !== "0") {
+        decimalIndex++;
+      }
+    }
+    else if (!decimal) {
+      displayDollars += numStr;
+    }
+
+    if (displayCents.length === 1) {
+      displayCents += "0";
+    }
+
+    display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
   }
 
   document.getElementById("buttonDecimal").addEventListener("click", function(){
     if (display.innerHTML.search(/\./) === -1) {
       display.innerHTML += ".";
     }
+    decimal = true;
   });
 
   document.getElementById("button0").addEventListener("click", function(){
-    if (checkLeadingNumbers()) {
-      display.innerHTML += "0";
-    }
+    updateDisplay("0");
   });
 
   document.getElementById("button00").addEventListener("click", function(){
-    display.innerHTML += "00";
+    if (decimal && displayCents === "") {
+      displayCents += "00";
+      decimalIndex += 2;
+    }
+    else if (!decimal) {
+      displayDollars += "00";
+    }
+    display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
+
   });
 
   document.getElementById("button1").addEventListener("click", function(){
-    display.innerHTML += "1";
+    updateDisplay("1");
   });
 
   document.getElementById("button2").addEventListener("click", function(){
-    display.innerHTML += "2";
+    updateDisplay("2");
   });
 
   document.getElementById("button3").addEventListener("click", function(){
-    display.innerHTML += "3";
+    updateDisplay("3");
   });
 
   document.getElementById("button4").addEventListener("click", function(){
-    display.innerHTML += "4";
+    updateDisplay("4");
   });
 
   document.getElementById("button5").addEventListener("click", function(){
-    display.innerHTML += "5";
+    updateDisplay("5");
   });
 
   document.getElementById("button6").addEventListener("click", function(){
-    display.innerHTML += "6";
+    updateDisplay("6");
   });
 
   document.getElementById("button7").addEventListener("click", function(){
-    display.innerHTML += "7";
+    updateDisplay("7");
   });
 
   document.getElementById("button8").addEventListener("click", function(){
-    display.innerHTML += "8";
+    updateDisplay("8");
   });
 
   document.getElementById("button9").addEventListener("click", function(){
-    display.innerHTML += "9";
+    updateDisplay("9");
   });
 
 
