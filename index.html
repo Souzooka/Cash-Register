@@ -110,18 +110,22 @@ window.onload = function() {
 
   function updateMoney() {
     money = Number(displayDollars) + Number(displayCents / 100);
-    return money;
+    if (negative === "") {
+      return money;
+    } else {
+      return money * -1;
+    }
   }
   function updateMoneyString() {
     if (money >= 0) {
       displayDollars = String((Math.floor(money)));
       displayCents = String((money - Math.floor(money)) * 100);
     } else {
-      if (money > -1 && money < 0) {
-        negative = "-";
-      }
-      displayDollars = String((Math.ceil(money)));
-      displayCents = String(Math.abs((money - Math.floor(money)) * 100 - 100));
+      money = Math.abs(money);
+      negative = "-";
+      displayDollars = String((Math.floor(money)));
+      displayCents = String((money - Math.floor(money)) * 100);
+      money *= -1;
     }
     displayCents = Math.round(displayCents);
     if (displayCents < 10) {
