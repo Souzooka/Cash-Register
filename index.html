@@ -120,17 +120,19 @@ window.onload = function() {
 
   function updateDisplay(numStr) {
 
-    if (decimal && checkLeadingNumbers()) {
-      displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
-      if (numStr === "0" && decimalIndex <= 1) {
-        decimalIndex++;
+    if (numStr) {
+      if (decimal && checkLeadingNumbers()) {
+        displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
+        if (numStr === "0" && decimalIndex <= 1) {
+          decimalIndex++;
+        }
+        else if (numStr !== "0") {
+          decimalIndex++;
+        }
       }
-      else if (numStr !== "0") {
-        decimalIndex++;
+      else if (!decimal) {
+        displayDollars += numStr;
       }
-    }
-    else if (!decimal) {
-      displayDollars += numStr;
     }
 
     display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
@@ -213,6 +215,11 @@ window.onload = function() {
   document.getElementById("buttonEquals").addEventListener("click", function(){
     if (calculatorDollarsOperationFunction === null) {
       clearDisplay();
+    } else {
+      calculatorDollarsOperationFunction(Number(displayDollars));
+      displayDollars = calculatorDollars.getTotal();
+      displayCents = "00";
+      updateDisplay();
     }
 
     calculatorDollarsOperationFunction = null;
@@ -221,7 +228,7 @@ window.onload = function() {
   });
 
   document.getElementById("buttonAdd").addEventListener("click", function(){
-    calculatorDollars.load(Number(displayCents));
+    calculatorDollars.load(Number(displayDollars));
     calculatorCents.load(Number(displayCents));
     calculatorDollarsOperationFunction = calculatorDollars.add;
     calculatorCentsOperationFunction = calculatorCents.add;
