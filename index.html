@@ -224,14 +224,15 @@ window.onload = function() {
         calculatorCentsOperationFunction(Number(displayCents));
         displayDollars = calculatorDollars.getTotal();
         displayCents = calculatorCents.getTotal();
-        if (displayCents < 10) {
-          displayCents = "0" + String(displayCents);
-        }
       } else {
         calculatorDollarsOperationFunction(Number(displayDollars) + Number(displayCents) / 100);
         displayDollars = calculatorDollars.getTotal();
         parseWholeNumber();
       }
+    }
+
+    if (displayCents < 10) {
+      displayCents = "0" + String(displayCents);
     }
 
     updateDisplay();
