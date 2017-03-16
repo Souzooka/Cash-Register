@@ -62,6 +62,10 @@ body {
   border-radius:2px;
 }
 
+.btn-register {
+  border-radius: 2px;
+}
+
 #buttonDivide {
   position: relative;
 }
@@ -80,4 +84,5 @@ body {
 #buttonEquals {
   position: relative;
   bottom: 30px;
+  background-color: #FFAAAA;
 }
