@@ -177,7 +177,7 @@ window.onload = function() {
     } else {
       displayDollars += "00";
     }
-    display.innerHTML = `${negative}$${Number(displayDollars)}.${displayCents}`;
+    updateDisplay();
   });
   document.getElementById("button1").addEventListener("click", function(){
     updateDisplay("1");
