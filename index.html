@@ -275,6 +275,12 @@ window.onload = function() {
     clearDisplay();
   });
 
+  document.getElementById("buttonGetBalance").addEventListener("click", function(){
+    displayDollars = cashRegister.getDollars();
+    displayCents = cashRegister.getCents();
+    display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
+  });
+
 
 };
 
