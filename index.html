@@ -127,7 +127,7 @@ window.onload = function() {
 
     if (numStr) {
       if (decimal && checkLeadingNumbers()) {
-        displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
+        displayCents = String(displayCents).substr(0, decimalIndex) + numStr + String(displayCents).substr(decimalIndex + 1);
         if (numStr === "0" && decimalIndex <= 1) {
           decimalIndex++;
         }
@@ -236,6 +236,8 @@ window.onload = function() {
     updateDisplay();
     calculatorDollarsOperationFunction = null;
     calculatorCoinsOperationFunction = null;
+    decimal = false;
+    decimalIndex = 0;
 
   });
 
