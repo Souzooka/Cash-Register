@@ -278,7 +278,20 @@ window.onload = function() {
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
     displayDollars = cashRegister.getDollars();
     displayCents = cashRegister.getCents();
+    if (displayCents < 10) {
+      displayCents = String(displayCents) + "0";
+    }
     display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
+  });
+
+  document.getElementById("buttonDeposit").addEventListener("click", function(){
+    cashRegister.addMoney(Number(displayDollars), Number(displayCents));
+    clearDisplay();
+  });
+
+  document.getElementById("buttonWithdraw").addEventListener("click", function(){
+    cashRegister.subtractMoney(Number(displayDollars), Number(displayCents));
+    clearDisplay();
   });
 
 

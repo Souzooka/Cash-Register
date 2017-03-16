@@ -1,8 +1,8 @@
 
 var cashRegisterModule = (function (){
 
-  var _dollars = 231;
-  var _cents = 23;
+  var _dollars = 0;
+  var _cents = 0;
 
   function getDollars() {
     return _dollars;
@@ -43,7 +43,9 @@ var cashRegisterModule = (function (){
     getDollars,
     setDollars,
     getCents,
-    setCents
+    setCents,
+    addMoney,
+    subtractMoney
 };
 
 
