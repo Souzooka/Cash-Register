@@ -3,6 +3,7 @@ var cashRegisterModule = (function (){
 
   var _cents = 0;
   var _dollars = 0;
+  var negativeOperation = false;
 
   function getDollars() {
     return _dollars;
@@ -10,6 +11,11 @@ var cashRegisterModule = (function (){
 
   function setDollars(value) {
     _dollars = value;
+
+    if (_dollars < 0) {
+      _cents = 0;
+      _dollars = 0;
+    }
   }
 
   function getCents() {
@@ -22,6 +28,7 @@ var cashRegisterModule = (function (){
 
 
   function addMoney(dollars, cents) {
+
     _cents += cents;
     _dollars += dollars;
 
@@ -32,8 +39,9 @@ var cashRegisterModule = (function (){
   }
 
   function subtractMoney(dollars, cents) {
-    var total = cents + (dollars * 100);
-    _cents -= total;
+
+    _cents -= cents;
+    _dollars -= dollars;
 
     while (_cents < 0) {
       _cents += 100;
