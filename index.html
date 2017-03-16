@@ -155,7 +155,7 @@ window.onload = function() {
         displayDollars += numStr;
       }
     }
-    display.innerHTML = `$${negative}${Number(displayDollars)}.${displayCents}`;
+    display.innerHTML = `${negative}$${Number(displayDollars)}.${displayCents}`;
   }
   function clearDisplay() {
   displayDollars = "0";
@@ -180,7 +180,7 @@ window.onload = function() {
     } else {
       displayDollars += "00";
     }
-    display.innerHTML = `$${negative}${Number(displayDollars)}.${displayCents}`;
+    display.innerHTML = `${negative}$${Number(displayDollars)}.${displayCents}`;
   });
   document.getElementById("button1").addEventListener("click", function(){
     updateDisplay("1");
