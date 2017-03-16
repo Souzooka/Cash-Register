@@ -279,7 +279,7 @@ window.onload = function() {
     displayDollars = cashRegister.getDollars();
     displayCents = cashRegister.getCents();
     if (displayCents < 10) {
-      displayCents = String(displayCents) + "0";
+      displayCents = "0" + String(displayCents);
     }
     display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
   });
