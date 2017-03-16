@@ -217,6 +217,9 @@ window.onload = function() {
     if (calculatorFunction === null) {
       clearDisplay();
     } else {
+      if (calculatorFunction === calculator.divide && updateMoney() === 0) {
+        return -1;
+      }
       calculatorFunction(updateMoney());
       money = calculator.getTotal();
       updateMoneyString();

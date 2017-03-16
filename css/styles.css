@@ -28,7 +28,7 @@ body {
     width: 100%;
     max-width: 510px;
     max-height: 160px;
-    background-color: #EFEFCA;
+    background-color: #8a8e96;
 }
 
 .col-sm-1 {
@@ -46,7 +46,7 @@ body {
 
 .btn {
   width: 100px;
-  height: 30px
+  height: 30px;
 }
 
 .btn-thin {
@@ -55,7 +55,8 @@ body {
   position: relative;
   background-color: #66BCFF;
   border-radius: 50%;
-  border: 0px;
+  border: 1px solid grey;
+
 }
 
 .btn-number {
