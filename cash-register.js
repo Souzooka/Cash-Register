@@ -26,24 +26,12 @@ var cashRegisterModule = (function (){
     var dollarsToAdd = Math.floor(operand);
   }
 
-  function decimal() {
-/*    if (element.innerHTML.search(/\./) === -1) {
-      element.innerHTML += ".";
-    }*/
-  }
-
-  function number(number) {
-    element.innerHTML += String(number);
-  }
-
   return {
     setDisplayElement,
     getDollars,
     getCents,
     addMoney,
-    decimal,
-    number
-  }
+}
 
 
 });

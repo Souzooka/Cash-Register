@@ -120,23 +120,17 @@ window.onload = function() {
 
   function updateDisplay(numStr) {
 
-    if (numStr) {
-      if (decimal && checkLeadingNumbers()) {
-        displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
-        if (numStr === "0" && decimalIndex <= 1) {
-          decimalIndex++;
-        }
-        else if (numStr !== "0") {
-          decimalIndex++;
-        }
+    if (decimal && checkLeadingNumbers()) {
+      displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
+      if (numStr === "0" && decimalIndex <= 1) {
+        decimalIndex++;
       }
-      else if (!decimal) {
-        displayDollars += numStr;
+      else if (numStr !== "0") {
+        decimalIndex++;
       }
-
-      if (displayCents.length === 1) {
-        displayCents += "0";
-      }
+    }
+    else if (!decimal) {
+      displayDollars += numStr;
     }
 
     display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
@@ -149,7 +143,7 @@ window.onload = function() {
   decimal = false;
   decimalIndex = 0;
 
-  updateDisplay();
+  display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
 
   }
 
