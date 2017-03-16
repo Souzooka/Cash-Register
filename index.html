@@ -5,7 +5,7 @@
   <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
   <meta charset="UTF-8">
   <title>Cash Register</title>
-  <script src="/cash-register.js" type="text/javascript"></script>
+
 </head>
 <body>
 
@@ -92,6 +92,88 @@
     </div>
   </div>
 </div>
+
+<script src="cash-register.js" type="text/javascript"></script>
+<script src="calculator.js"></script>
+<script type="text/javascript">
+
+window.onload = function() {
+  var calculatorCents = calculatorModule();
+  var calculatorDollars = calculatorModule();
+  var cashRegister = cashRegisterModule();
+  var display = document.getElementById("registerDisplay");
+  var displayDollars = 0;
+  var displayCents = 0;
+  var decimal = false;
+  cashRegister.setDisplayElement(display);
+
+  function checkLeadingNumbers() {
+    if (display.innerHTML.search(/\./) !== -1 && display.innerHTML.length - display.innerHTML.search(/\./) >= 3) {
+      return false;
+    } else {
+      return true;
+    }
+
+  }
+
+  document.getElementById("buttonDecimal").addEventListener("click", function(){
+    if (display.innerHTML.search(/\./) === -1) {
+      display.innerHTML += ".";
+    }
+  });
+
+  document.getElementById("button0").addEventListener("click", function(){
+    if (checkLeadingNumbers()) {
+      display.innerHTML += "0";
+    }
+  });
+
+  document.getElementById("button00").addEventListener("click", function(){
+    display.innerHTML += "00";
+  });
+
+  document.getElementById("button1").addEventListener("click", function(){
+    display.innerHTML += "1";
+  });
+
+  document.getElementById("button2").addEventListener("click", function(){
+    display.innerHTML += "2";
+  });
+
+  document.getElementById("button3").addEventListener("click", function(){
+    display.innerHTML += "3";
+  });
+
+  document.getElementById("button4").addEventListener("click", function(){
+    display.innerHTML += "4";
+  });
+
+  document.getElementById("button5").addEventListener("click", function(){
+    display.innerHTML += "5";
+  });
+
+  document.getElementById("button6").addEventListener("click", function(){
+    display.innerHTML += "6";
+  });
+
+  document.getElementById("button7").addEventListener("click", function(){
+    display.innerHTML += "7";
+  });
+
+  document.getElementById("button8").addEventListener("click", function(){
+    display.innerHTML += "8";
+  });
+
+  document.getElementById("button9").addEventListener("click", function(){
+    display.innerHTML += "9";
+  });
+
+
+
+};
+
+</script>
+
 
 </body>
 </html>

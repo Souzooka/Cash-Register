@@ -129,6 +129,6 @@ var calculatorModule = (function(){
 
 });
 
-module.exports = {
+/*module.exports = {
   calculatorModule
-};
+};*/

@@ -1,11 +1,16 @@
-var calculatorScript = require( './calculator.js' );
-var calculatorDollars = calculatorScript.calculatorModule();
-var calculatorCents = calculatorScript.calculatorModule();
 
 var cashRegisterModule = (function (){
 
   var _dollars = 0;
   var _cents = 0;
+  var _dollarsDisplay = 0;
+  var _centsDisplay = 0;
+  var _display = "$0.00";
+  var _displayElement = null;
+
+  function setDisplayElement(element) {
+    _displayElement = element;
+  }
 
   function getDollars() {
     return _dollars;
@@ -15,25 +20,30 @@ var cashRegisterModule = (function (){
     return _cents;
   }
 
-  function addMoney(element, operand) {
+  function addMoney(operand) {
     //TODO
     var centsToAdd = operand - Math.floor(operand);
     var dollarsToAdd = Math.floor(operand);
   }
 
-  function decimal(element) {
-    if (element.innerHTML.search(/\./) === -1) {
+  function decimal() {
+/*    if (element.innerHTML.search(/\./) === -1) {
       element.innerHTML += ".";
-    }
+    }*/
+  }
+
+  function number(number) {
+    element.innerHTML += String(number);
   }
 
   return {
+    setDisplayElement,
     getDollars,
     getCents,
     addMoney,
-    decimal
+    decimal,
+    number
   }
 
 
 });
-
