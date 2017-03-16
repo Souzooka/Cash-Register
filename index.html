@@ -96,7 +96,6 @@
 <script src="cash-register.js" type="text/javascript"></script>
 <script src="calculator.js"></script>
 <script type="text/javascript">
-
 window.onload = function() {
   var calculatorCents = calculatorModule();
   var calculatorDollars = calculatorModule();
@@ -107,16 +106,13 @@ window.onload = function() {
   var display = document.getElementById("registerDisplay");
   var displayDollars = "0";
   var displayCents = "00";
-  var cents = 0;
   var decimal = false;
   var decimalIndex = 0;
-  var negativeZero = "";
 
   function parseWholeNumber() {
-    displayCents = cents % 100;
-    displayDollars = Math.floor(cents / 100);
+    displayCents = Math.round((displayDollars - Math.floor(displayDollars)) * 100);
+    displayDollars = Math.floor(displayDollars);
   }
-
   function checkLeadingNumbers() {
     if (decimalIndex > 1) {
       return false;
@@ -124,9 +120,7 @@ window.onload = function() {
       return true;
     }
   }
-
   function updateDisplay(numStr) {
-
     if (numStr) {
       if (decimal && checkLeadingNumbers()) {
         displayCents = String(displayCents).substr(0, decimalIndex) + numStr + String(displayCents).substr(decimalIndex + 1);
@@ -141,172 +135,131 @@ window.onload = function() {
         displayDollars += numStr;
       }
     }
-
-    display.innerHTML = `$${negativeZero}${Number(displayDollars)}.${displayCents}`;
+    display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
   }
-
-  function countCents() {
-    if (display.innerHTML.charAt(1) !== "-") {
-      cents = Number(displayDollars) * 100 + Number(displayCents);
-    } else {
-      cents = Number(displayDollars) * 100 - Number(displayCents);
-    }
-    return cents;
-  }
-
   function clearDisplay() {
-
   displayDollars = "0";
   displayCents = "00";
   decimal = false;
   decimalIndex = 0;
-  negativeZero = "";
-
   display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
-
   }
-
   document.getElementById("buttonDecimal").addEventListener("click", function(){
+    if (display.innerHTML.search(/\./) === -1) {
+      display.innerHTML += ".";
+    }
     decimal = true;
   });
-
   document.getElementById("button0").addEventListener("click", function(){
     updateDisplay("0");
   });
-
   document.getElementById("button00").addEventListener("click", function(){
     if (decimal) {
       decimalIndex += 2;
     } else {
       displayDollars += "00";
     }
-    updateDisplay();
-
+    display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
   });
-
   document.getElementById("button1").addEventListener("click", function(){
     updateDisplay("1");
   });
-
   document.getElementById("button2").addEventListener("click", function(){
     updateDisplay("2");
   });
-
   document.getElementById("button3").addEventListener("click", function(){
     updateDisplay("3");
   });
-
   document.getElementById("button4").addEventListener("click", function(){
     updateDisplay("4");
   });
-
   document.getElementById("button5").addEventListener("click", function(){
     updateDisplay("5");
   });
-
   document.getElementById("button6").addEventListener("click", function(){
     updateDisplay("6");
   });
-
   document.getElementById("button7").addEventListener("click", function(){
     updateDisplay("7");
   });
-
   document.getElementById("button8").addEventListener("click", function(){
     updateDisplay("8");
   });
-
   document.getElementById("button9").addEventListener("click", function(){
     updateDisplay("9");
   });
-
   document.getElementById("buttonClear").addEventListener("click", function(){
     clearDisplay();
   });
-
   document.getElementById("buttonEquals").addEventListener("click", function(){
-    if (calculatorCentsOperationFunction === null) {
+    if (calculatorDollarsOperationFunction === null) {
       clearDisplay();
     } else {
-      countCents();
-        calculatorCentsOperationFunction(cents);
-        cents = calculatorCents.getTotal();
+      if (!operatingOnWholeValue) {
+        calculatorDollarsOperationFunction(Number(displayDollars));
+        calculatorCentsOperationFunction(Number(displayCents));
+        displayDollars = calculatorDollars.getTotal();
+        displayCents = calculatorCents.getTotal();
+      } else {
+        calculatorDollarsOperationFunction(Number(displayDollars) + Number(displayCents) / 100);
+        displayDollars = calculatorDollars.getTotal();
         parseWholeNumber();
+      }
     }
-
     if (displayCents < 10) {
       displayCents = "0" + String(displayCents);
     }
-
     updateDisplay();
     calculatorDollarsOperationFunction = null;
     calculatorCoinsOperationFunction = null;
     decimal = false;
     decimalIndex = 0;
-
   });
-
   document.getElementById("buttonAdd").addEventListener("click", function(){
-    countCents();
-    calculatorCents.load(cents);
+    calculatorDollars.load(Number(displayDollars));
+    calculatorCents.load(Number(displayCents));
+    calculatorDollarsOperationFunction = calculatorDollars.add;
     calculatorCentsOperationFunction = calculatorCents.add;
     operatingOnWholeValue = false;
     clearDisplay();
   });
-
   document.getElementById("buttonMultiply").addEventListener("click", function(){
-    countCents();
-    calculatorCents.load(cents);
-    calculatorCentsOperationFunction = calculatorCents.multiply;
+    calculatorDollars.load(Number(displayDollars) + (Number(displayCents) / 100));
+    calculatorDollarsOperationFunction = calculatorDollars.multiply;
     operatingOnWholeValue = true;
     clearDisplay();
   });
-
   document.getElementById("buttonSubtract").addEventListener("click", function(){
-    countCents();
-    calculatorCents.load(cents);
+    calculatorDollars.load(Number(displayDollars));
+    calculatorCents.load(Number(displayCents));
+    calculatorDollarsOperationFunction = calculatorDollars.subtract;
     calculatorCentsOperationFunction = calculatorCents.subtract;
     operatingOnWholeValue = false;
     clearDisplay();
   });
-
   document.getElementById("buttonDivide").addEventListener("click", function(){
-    countCents();
-    calculatorCents.load(cents);
-    calculatorCentsOperationFunction = calculatorCents.divide;
+    calculatorDollars.load(Number(displayDollars) + (Number(displayCents) / 100));
+    calculatorDollarsOperationFunction = calculatorDollars.divide;
     operatingOnWholeValue = true;
     clearDisplay();
   });
-
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
     displayDollars = cashRegister.getDollars();
-    displayCents = (Math.abs(cashRegister.getCents() % 100));
+    displayCents = cashRegister.getCents();
     if (displayCents < 10) {
       displayCents = "0" + String(displayCents);
     }
-    if (cashRegister.getCents() < 0 && cashRegister.getCents() > -100) {
-      negativeZero = "-";
-    } else {
-      negativeZero = "";
-    }
     updateDisplay();
   });
-
   document.getElementById("buttonDeposit").addEventListener("click", function(){
-    countCents();
-    cashRegister.addMoney(Math.floor(cents / 100), (cents % 100));
+    cashRegister.addMoney(Number(displayDollars), Number(displayCents));
     clearDisplay();
   });
-
   document.getElementById("buttonWithdraw").addEventListener("click", function(){
-    countCents();
-    cashRegister.subtractMoney(Math.floor(cents / 100), (cents % 100));
+    cashRegister.subtractMoney(Number(displayDollars), Number(displayCents));
     clearDisplay();
   });
-
-
 };
-
 </script>
 
 

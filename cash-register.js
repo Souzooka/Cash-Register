@@ -16,7 +16,7 @@ var cashRegisterModule = (function (){
   }
 
   function getCents() {
-    return _cents;
+    return _cents % 100;
   }
 
   function setCents(value) {
@@ -32,6 +32,11 @@ var cashRegisterModule = (function (){
   function subtractMoney(dollars, cents) {
     var total = cents + (dollars * 100);
     _cents -= total;
+
+    if (_cents < 0) {
+      _cents = 0;
+    }
+
   }
 
 
