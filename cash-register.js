@@ -1,64 +1,31 @@
 
 var cashRegisterModule = (function (){
 
-  var _cents = 0;
-  var _dollars = 0;
+  var _money = 0;
 
-  function getDollars() {
-    return _dollars;
+  function getMoney() {
+    return _money;
   }
 
-  function setDollars(value) {
-    _dollars = value;
-
-    if (_dollars < 0) {
-      _cents = 0;
-      _dollars = 0;
-    }
+  function setMoney(value) {
+    _money = value;
   }
 
-  function getCents() {
-    return _cents % 100;
+  function addMoney(value) {
+
+    _money += value;
   }
 
-  function setCents(value) {
-    _cents = value;
-  }
+  function subtractMoney(value) {
 
-  function addMoney(dollars, cents) {
-
-    _cents += cents;
-    _dollars += dollars;
-
-    while (_cents >= 100) {
-      _cents -= 100;
-      _dollars++;
-    }
-  }
-
-  function subtractMoney(dollars, cents) {
-
-    _cents -= cents;
-    _dollars -= dollars;
-
-    while (_cents < 0) {
-      _cents += 100;
-      _dollars--;
-    }
-
-    if (_dollars < 0) {
-      _cents = 0;
-      _dollars = 0;
-    }
+    _money -= value;
 
   }
 
 
   return {
-    getDollars,
-    setDollars,
-    getCents,
-    setCents,
+    getMoney,
+    setMoney,
     addMoney,
     subtractMoney
 };
