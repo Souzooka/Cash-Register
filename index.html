@@ -168,8 +168,7 @@ window.onload = function() {
   document.getElementById("button00").addEventListener("click", function(){
     if (decimal) {
       decimalIndex += 2;
-    }
-    else if (!decimal) {
+    } else {
       displayDollars += "00";
     }
     display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
