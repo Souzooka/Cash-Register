@@ -111,7 +111,7 @@ window.onload = function() {
   var decimalIndex = 0;
 
   function parseWholeNumber() {
-    displayCents = (displayDollars - Math.floor(displayDollars)) * 100;
+    displayCents = Math.round((displayDollars - Math.floor(displayDollars)) * 100);
     displayDollars = Math.floor(displayDollars);
   }
 
