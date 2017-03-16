@@ -16,16 +16,9 @@ var cashRegisterModule = (function (){
     return _cents;
   }
 
-  function addMoney(operand) {
-    //TODO
-    var centsToAdd = operand - Math.floor(operand);
-    var dollarsToAdd = Math.floor(operand);
-  }
-
   return {
     getDollars,
     getCents,
-    addMoney,
 }
 
 
