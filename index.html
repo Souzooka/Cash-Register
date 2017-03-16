@@ -138,6 +138,8 @@ window.onload = function() {
       else if (!decimal) {
         displayDollars += numStr;
       }
+    } else {
+      displayCents = "00";
     }
 
     display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
