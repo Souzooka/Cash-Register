@@ -17,8 +17,9 @@ body {
   max-width: 520px;
 }
 
-.row {
-
+.register-container {
+  border-style: solid;
+  max-width: 530px;
 }
 
 .grid-container {
