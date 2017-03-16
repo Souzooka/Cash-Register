@@ -166,9 +166,6 @@ window.onload = function() {
   display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
   }
   document.getElementById("buttonDecimal").addEventListener("click", function(){
-    if (display.innerHTML.search(/\./) === -1) {
-      display.innerHTML += ".";
-    }
     decimal = true;
   });
   document.getElementById("button0").addEventListener("click", function(){
