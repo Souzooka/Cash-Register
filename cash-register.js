@@ -8,10 +8,6 @@ var cashRegisterModule = (function (){
   var _display = "$0.00";
   var _displayElement = null;
 
-  function setDisplayElement(element) {
-    _displayElement = element;
-  }
-
   function getDollars() {
     return _dollars;
   }
