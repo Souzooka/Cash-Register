@@ -101,13 +101,14 @@ window.onload = function() {
   var calculatorCents = calculatorModule();
   var calculatorDollars = calculatorModule();
   var cashRegister = cashRegisterModule();
+
   var display = document.getElementById("registerDisplay");
   var displayDollars = "0";
   var displayCents = "00";
   var decimal = false;
   var decimalIndex = 0;
-  cashRegister.setDisplayElement(display);
-
+  var cashRegisterOperand1 = null;
+  var cashRegisterOperand2 = null;
 
   function checkLeadingNumbers() {
     if (decimalIndex > 1) {
@@ -119,24 +120,37 @@ window.onload = function() {
 
   function updateDisplay(numStr) {
 
-    if (decimal && checkLeadingNumbers()) {
-      displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
-      if (numStr === "0" && decimalIndex <= 1) {
-        decimalIndex++;
+    if (numStr) {
+      if (decimal && checkLeadingNumbers()) {
+        displayCents = displayCents.substr(0, decimalIndex) + numStr + displayCents.substr(decimalIndex + 1);
+        if (numStr === "0" && decimalIndex <= 1) {
+          decimalIndex++;
+        }
+        else if (numStr !== "0") {
+          decimalIndex++;
+        }
       }
-      else if (numStr !== "0") {
-        decimalIndex++;
+      else if (!decimal) {
+        displayDollars += numStr;
       }
-    }
-    else if (!decimal) {
-      displayDollars += numStr;
-    }
 
-    if (displayCents.length === 1) {
-      displayCents += "0";
+      if (displayCents.length === 1) {
+        displayCents += "0";
+      }
     }
 
     display.innerHTML = `$${Number(displayDollars)}.${displayCents}`;
+  }
+
+  function clearDisplay() {
+
+  displayDollars = "0";
+  displayCents = "00";
+  decimal = false;
+  decimalIndex = 0;
+
+  updateDisplay();
+
   }
 
   document.getElementById("buttonDecimal").addEventListener("click", function(){
@@ -198,6 +212,9 @@ window.onload = function() {
     updateDisplay("9");
   });
 
+  document.getElementById("buttonClear").addEventListener("click", function(){
+    clearDisplay();
+  });
 
 
 };
