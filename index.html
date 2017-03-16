@@ -17,13 +17,13 @@
   <div class="grid-container">
     <div class="row">
       <div class="col-sm-1">
-        <button class="btn" id="button7">7</button>
+        <button class="btn btn-number" id="button7">7</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="button8">8</button>
+        <button class="btn btn-number" id="button8">8</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="button9">9</button>
+        <button class="btn btn-number" id="button9">9</button>
       </div>
       <div class="col-sm-1">
         <button class="btn btn-thin" id="buttonDivide">÷</button>
@@ -35,13 +35,13 @@
 
     <div class="row">
       <div class="col-sm-1">
-        <button class="btn" id="button4">4</button>
+        <button class="btn btn-number" id="button4">4</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="button5">5</button>
+        <button class="btn btn-number" id="button5">5</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="button6">6</button>
+        <button class="btn btn-number" id="button6">6</button>
       </div>
       <div class="col-sm-1">
         <button class="btn btn-thin" id="buttonMultiply">x</button>
@@ -53,13 +53,13 @@
 
     <div class="row">
       <div class="col-sm-1">
-        <button class="btn" id="button1">1</button>
+        <button class="btn btn-number" id="button1">1</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="button2">2</button>
+        <button class="btn btn-number" id="button2">2</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="button3">3</button>
+        <button class="btn btn-number" id="button3">3</button>
       </div>
       <div class="col-sm-1">
         <button class="btn btn-thin" id="buttonSubtract">-</button>
@@ -71,13 +71,13 @@
 
     <div class="row">
       <div class="col-sm-1">
-        <button class="btn" id="button0">0</button>
+        <button class="btn btn-number" id="button0">0</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="button00">00</button>
+        <button class="btn btn-number" id="button00">00</button>
       </div>
       <div class="col-sm-1">
-        <button class="btn" id="buttonDecimal">.</button>
+        <button class="btn btn-number" id="buttonDecimal">.</button>
       </div>
       <div class="col-sm-1">
         <button class="btn btn-thin" id="buttonAdd">+</button>
@@ -220,7 +220,6 @@ window.onload = function() {
       calculatorFunction(updateMoney());
       money = calculator.getTotal();
       updateMoneyString();
-      calculatorFunction = null;
       decimal = false;
       decimalIndex = 0;
     }

@@ -15,6 +15,7 @@ body {
   font-family: 'Inconsolata', monospace;
   background-color: #99CC99;
   max-width: 520px;
+  border-bottom: 1px solid;
 }
 
 .register-container {
@@ -27,7 +28,7 @@ body {
     width: 100%;
     max-width: 510px;
     max-height: 160px;
-    background-color: #ECECC7;
+    background-color: #EFEFCA;
 }
 
 .col-sm-1 {
@@ -52,6 +53,13 @@ body {
   height: 20px;
   width:60px;
   position: relative;
+  background-color: #66BCFF;
+  border-radius: 50%;
+  border: 0px;
+}
+
+.btn-number {
+  border-radius:2px;
 }
 
 #buttonDivide {
