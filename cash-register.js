@@ -1,15 +1,18 @@
 
 var cashRegisterModule = (function (){
 
-  var _dollars = 0;
   var _cents = 0;
 
   function getDollars() {
-    return _dollars;
+    if (_cents >= 0) {
+      return Math.floor(_cents / 100);
+    } else {
+      return Math.ceil(_cents / 100);
+    }
   }
 
   function setDollars(value) {
-    _dollars = value;
+    _cents += (value * 100);
   }
 
   function getCents() {
@@ -20,22 +23,15 @@ var cashRegisterModule = (function (){
     _cents = value;
   }
 
+
   function addMoney(dollars, cents) {
-    _dollars += dollars;
-    _cents += cents;
-    while (_cents >= 100) {
-      _dollars++;
-      cents -= 100;
-    }
+    var total = cents + (dollars * 100);
+    _cents += total;
   }
 
   function subtractMoney(dollars, cents) {
-    _dollars -= dollars;
-    _cents -= cents;
-    while (_cents < 0) {
-      _dollars--;
-      cents += 100;
-    }
+    var total = cents + (dollars * 100);
+    _cents -= total;
   }
 
 
