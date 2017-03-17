@@ -96,6 +96,7 @@ window.onload = function() {
       updateMoneyString();
       decimal = false;
       decimalIndex = 0;
+      calculatorFunction = null;
     }
   });
   document.getElementById("buttonAdd").addEventListener("click", function(){
@@ -121,6 +122,7 @@ window.onload = function() {
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
     money = calculator.recallMemory();
     calculatorFunction = null;
+    calculator.load(0);
     updateMoneyString();
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
