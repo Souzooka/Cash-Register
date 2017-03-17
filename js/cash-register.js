@@ -74,39 +74,13 @@ window.onload = function() {
   document.getElementById("buttonDecimal").addEventListener("click", function(){
     decimal = true;
   });
-  document.getElementById("button0").addEventListener("click", function(){
-    updateDisplay("0");
-  });
-  document.getElementById("button00").addEventListener("click", function(){
-    updateDisplay("00");
-  });
-  document.getElementById("button1").addEventListener("click", function(){
-    updateDisplay("1");
-  });
-  document.getElementById("button2").addEventListener("click", function(){
-    updateDisplay("2");
-  });
-  document.getElementById("button3").addEventListener("click", function(){
-    updateDisplay("3");
-  });
-  document.getElementById("button4").addEventListener("click", function(){
-    updateDisplay("4");
-  });
-  document.getElementById("button5").addEventListener("click", function(){
-    updateDisplay("5");
-  });
-  document.getElementById("button6").addEventListener("click", function(){
-    updateDisplay("6");
-  });
-  document.getElementById("button7").addEventListener("click", function(){
-    updateDisplay("7");
-  });
-  document.getElementById("button8").addEventListener("click", function(){
-    updateDisplay("8");
-  });
-  document.getElementById("button9").addEventListener("click", function(){
-    updateDisplay("9");
-  });
+  for (var i = 0; i < document.getElementsByClassName("btn-number").length; i++) {
+    document.getElementsByClassName("btn-number")[i].addEventListener("click", function(){
+      if (String(this.id.slice(6)) !== "Decimal") {
+        updateDisplay(String(this.id.slice(6)));
+      }
+    });
+  }
   document.getElementById("buttonClear").addEventListener("click", function(){
     clearDisplay();
   });
