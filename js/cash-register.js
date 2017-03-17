@@ -1,45 +1,7 @@
-
-var cashRegisterModule = (function (){
-
-  var _money = 0;
-
-  function getMoney() {
-    return _money;
-  }
-
-  function setMoney(value) {
-    _money = value;
-  }
-
-  function addMoney(value) {
-
-    _money += value;
-  }
-
-  function subtractMoney(value) {
-
-    _money -= value;
-
-  }
-
-
-  return {
-    getMoney,
-    setMoney,
-    addMoney,
-    subtractMoney
-  };
-
-
-
-});
-
-
 window.onload = function() {
   "use strict";
   var calculator = calculatorModule();
   var calculatorFunction = null;
-  var cashRegister = cashRegisterModule();
   var display = document.getElementById("registerDisplay");
   var money = 0;
   var negative = "";
@@ -90,10 +52,14 @@ window.onload = function() {
         else if (numStr !== "0") {
           decimalIndex++;
         }
+        if (numStr === "00") {
+          decimalIndex += 2;
+        }
       }
       else if (!decimal) {
         displayDollars += numStr;
       }
+
     }
     display.innerHTML = `${negative}$${Number(displayDollars)}.${displayCents}`;
   }
@@ -112,12 +78,7 @@ window.onload = function() {
     updateDisplay("0");
   });
   document.getElementById("button00").addEventListener("click", function(){
-    if (decimal) {
-      decimalIndex += 2;
-    } else {
-      displayDollars += "00";
-    }
-    updateDisplay();
+    updateDisplay("00");
   });
   document.getElementById("button1").addEventListener("click", function(){
     updateDisplay("1");
@@ -184,15 +145,15 @@ window.onload = function() {
     clearDisplay();
   });
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
-    money = cashRegister.getMoney();
+    money = calculator.recallMemory();
     updateMoneyString();
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
-    cashRegister.addMoney(updateMoney());
+    calculator.addMemory(updateMoney());
     clearDisplay();
   });
   document.getElementById("buttonWithdraw").addEventListener("click", function(){
-    cashRegister.subtractMoney(updateMoney());
+    calculator.subtractMemory(updateMoney());
     clearDisplay();
   });
 };

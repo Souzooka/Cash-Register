@@ -131,6 +131,8 @@ var calculatorModule = (function(){
     divide,
     recallMemory,
     saveMemory,
+    addMemory,
+    subtractMemory,
     clearMemory
   };
 
