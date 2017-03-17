@@ -89,6 +89,8 @@ window.onload = function() {
       clearDisplay();
     } else {
       if (calculatorFunction === calculator.divide && updateMoney() === 0) {
+        alert("User attempted to divide by 0, authorities alerted.") /* a wild inline comment appeared */;
+calculatorFunction = null;
         return -1;
       }
       calculatorFunction(updateMoney());
