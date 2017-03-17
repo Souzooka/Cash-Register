@@ -53,10 +53,14 @@ function cashRegisterModule() {
           else if (numStr !== "0") {
             decimalIndex++;
           }
+          if (numStr === "00") {
+            decimalIndex += 2;
+          }
         }
         else if (!decimal) {
           displayDollars += numStr;
         }
+
       }
       display.innerHTML = `${negative}$${Number(displayDollars)}.${displayCents}`;
     }
@@ -75,12 +79,7 @@ function cashRegisterModule() {
       updateDisplay("0");
     });
     document.getElementById("button00").addEventListener("click", function(){
-      if (decimal) {
-        decimalIndex += 2;
-      } else {
-        displayDollars += "00";
-      }
-      updateDisplay();
+      updateDisplay("00");
     });
     document.getElementById("button1").addEventListener("click", function(){
       updateDisplay("1");
