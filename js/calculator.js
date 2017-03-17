@@ -103,6 +103,14 @@ var calculatorModule = (function(){
     _memory = 0;
   }
 
+  function addMemory(value) {
+    _memory += value;
+  }
+
+  function subtractMemory(value) {
+    _memory -= value;
+  }
+
   /**
    * Validation
    */
