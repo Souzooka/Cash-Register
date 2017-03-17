@@ -120,6 +120,7 @@ window.onload = function() {
   });
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
     money = calculator.recallMemory();
+    calculatorFunction = null;
     updateMoneyString();
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
