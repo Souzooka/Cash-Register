@@ -4,17 +4,16 @@ window.onload = function() {
   var calculatorFunction = null;
   var displayNum = 0;
   var money = 0;
+  var storedMoney = 0;
   var moneyStr = "";
   var display = document.getElementById("registerDisplay");
   var decimal = false;
   var originalDisplayStr = "[$0.00_______________________]";
 
-  // Money is only updated when updateASCIIDisplay or clearDisplay is called!
   function updateASCIIDisplay(numStr) {
 
     moneyStr = display.innerHTML.slice(2);
     moneyStr = String(parseFloat(moneyStr));
-    money = Number(moneyStr);
 
     if (numStr && !decimal) {
       moneyStr += numStr;
@@ -42,13 +41,14 @@ window.onload = function() {
   }
 
   function clearDisplay() {
-    money = 0;
     moneyStr = "";
     decimal = false;
     display.innerHTML = originalDisplayStr;
   }
 
-
+  function parseMoney() {
+    return parseFloat(display.innerHTML.slice(2));
+  }
 
 
 
