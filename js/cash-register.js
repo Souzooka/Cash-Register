@@ -4,6 +4,7 @@ window.onload = function() {
   var calculatorFunction = null;
   var display = document.getElementById("registerDisplay");
   var money = 0;
+  var storedMoney = 0;
   var negative = "";
   var displayDollars = "0";
   var displayCents = "00";
@@ -122,17 +123,26 @@ calculatorFunction = null;
     clearDisplay();
   });
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
-    money = calculator.recallMemory();
-    calculatorFunction = null;
-    calculator.load(0);
+    money = storedMoney;
     updateMoneyString();
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
-    calculator.addMemory(updateMoney());
+    if (updateMoney() < 0) {
+      alert("Cannot deposit a negative amount!");
+    } else {
+      storedMoney += updateMoney();
+    }
     clearDisplay();
   });
   document.getElementById("buttonWithdraw").addEventListener("click", function(){
-    calculator.subtractMemory(updateMoney());
+    if (storedMoney - updateMoney() < 0) {
+      alert("Insufficient funds!");
+    }
+    else if (updateMoney() < 0) {
+      alert("Perhaps you're looking for the \"Deposit Cash\" button?");
+    } else {
+      storedMoney -= updateMoney();
+    }
     clearDisplay();
   });
 };
