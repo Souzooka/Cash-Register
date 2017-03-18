@@ -51,7 +51,7 @@ window.onload = function() {
       decimalIndex++;
     }
 
-    if (Number(moneyStr) >= 1e+20) {
+    if (Number(moneyStr) >= 1e+14) {
       alert("Buffer Overflow Error!");
       money = 0;
       moneyStr = "0";
