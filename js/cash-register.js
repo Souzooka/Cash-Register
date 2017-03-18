@@ -6,8 +6,11 @@ window.onload = function() {
   var money = 0;
   var storedMoney = 0;
   var moneyStr = "";
+  var moneyStrDollars = "0";
+  var moneyStrCents = "00";
   var display = document.getElementById("registerDisplay");
   var decimal = false;
+  var decimalIndex = 0;
   var originalDisplayStr = "[$0.00_______________________]";
 
   // if we pass in a number (as a result of calc) as a string, we can load a number straight into the display
@@ -15,7 +18,13 @@ window.onload = function() {
   function updateASCIIDisplay(numStr) {
 
     if (Number(numStr) !== Math.round(Number(numStr))) {
+      if (String(numStr).length - String(Math.round(Number(numStr))).length === 3) {
+        decimalIndex = 2;
+      } else {
+        decimalIndex = 1;
+      }
       moneyStr = numStr;
+      decimal = true;
     }
     else if (numStr && !decimal) {
 
@@ -24,8 +33,22 @@ window.onload = function() {
 
       moneyStr += numStr;
     }
-    else if (false) {
+    else if (numStr && decimal && decimalIndex < 2) {
+      if (numStr === "00") {
+        return null;
+      }
+      if (decimalIndex === 0) {
+        moneyStrCents = numStr + "0";
+      } else {
+        moneyStrCents = moneyStrCents[0] + numStr;
+      }
 
+      moneyStr = display.innerHTML.slice(2);
+      moneyStr = parseFloat(moneyStr);
+      moneyStr = String(Math.floor(moneyStr).toFixed(0));
+      moneyStr = moneyStr + "." + moneyStrCents;
+
+      decimalIndex++;
     }
 
     if (Number(moneyStr) >= 1e+20) {
@@ -49,6 +72,7 @@ window.onload = function() {
   function clearDisplay() {
     moneyStr = "";
     decimal = false;
+    decimalIndex = 0;
     display.innerHTML = originalDisplayStr;
   }
 
@@ -91,6 +115,9 @@ window.onload = function() {
   });
   document.getElementById("button9").addEventListener("click", function(){
     updateASCIIDisplay("9");
+  });
+  document.getElementById("buttonDecimal").addEventListener("click", function(){
+    decimal = true;
   });
   document.getElementById("buttonClear").addEventListener("click", function(){
     clearDisplay();
