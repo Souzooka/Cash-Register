@@ -122,7 +122,17 @@ window.onload = function() {
   document.getElementById("buttonClear").addEventListener("click", function(){
     clearDisplay();
   });
-
+  document.getElementById("buttonDeposit").addEventListener("click", function(){
+    storedMoney += parseMoney();
+    clearDisplay();
+  });
+  document.getElementById("buttonWithdraw").addEventListener("click", function(){
+    storedMoney -= parseMoney();
+    clearDisplay();
+  });
+  document.getElementById("buttonGetBalance").addEventListener("click", function(){
+    updateASCIIDisplay(String(storedMoney));
+  });
 
 
 /*if (calculator.recallMemory() === 0) {
