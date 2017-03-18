@@ -1,10 +1,10 @@
 body {
   font-family: 'Inconsolata', monospace;
-  font-size: 38px;
+  font-size: 72px;
 }
 
 #button00 {
-  margin-right: -10px;
+  margin-right: -12px;
 }
 
 .row:before,
@@ -16,18 +16,20 @@ body {
 
 .panel{
   padding-left:30px;
-  padding-top:10px;
+  padding-top:30px;
+  padding-bottom:30px;
 }
 
 .register-container {
-  max-width: 800px;
+  max-width: 1600px;
 }
 
 .grid-container {
-    padding: 10px;
-    width: 100%;
-    max-width: 780px;
-    max-height: 160px;
+  padding: 10px;
+  width: 100%;
+  max-width: 1580px;
+  min-width: 1580px;
+  max-height: 160px;
 }
 
 .col-sm-1 {
@@ -41,5 +43,5 @@ body {
 .col-md-offset-3 {
   /* hardcoded */
   position: relative;
-  left: 33%;
+  left: 28.9%;
 }
