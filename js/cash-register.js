@@ -103,12 +103,8 @@ window.onload = function() {
         return -1;
       }
 
-
-      // CALC LOGIC
       calculator.load(calculator.recallMemory());
       calculatorFunction(updateMoney());
-
-
 
       money = calculator.getTotal();
       updateMoneyString();
@@ -117,7 +113,6 @@ window.onload = function() {
       calculatorFunction = null;
       operatorPressed = false;
 
-      // CALC LOGIC
       calculator.load(0);
       calculator.saveMemory();
     }
@@ -130,6 +125,12 @@ window.onload = function() {
       calculator.loadMemory(updateMoney());
       calculatorFunction = calculator.add;
       clearDisplay();
+      return null;
+    }
+
+    if (updateMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.add;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
       return null;
     }
 
@@ -159,6 +160,12 @@ window.onload = function() {
       return null;
     }
 
+    if (updateMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.multiply;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
+      return null;
+    }
+
     if (calculatorFunction !== calculator.multiply) {
       calculator.load(calculator.recallMemory());
       calculatorFunction(updateMoney());
@@ -184,6 +191,12 @@ window.onload = function() {
       return null;
     }
 
+    if (updateMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.subtract;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
+      return null;
+    }
+
     if (calculatorFunction !== calculator.subtract) {
       calculator.load(calculator.recallMemory());
       calculatorFunction(updateMoney());
@@ -205,6 +218,12 @@ window.onload = function() {
       calculator.loadMemory(updateMoney());
       calculatorFunction = calculator.divide;
       clearDisplay();
+      return null;
+    }
+
+    if (updateMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.divide;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
       return null;
     }
 
