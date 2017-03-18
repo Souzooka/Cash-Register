@@ -119,7 +119,11 @@ window.onload = function() {
       }
 
       calculator.load(calculator.recallMemory());
-      calculatorFunction(updateMoney());
+      if (tempDisplayActive) {
+        calculatorFunction(Number(display.innerHTML.replace(/\$/g, "")));
+      } else {
+        calculatorFunction(updateMoney());
+      }
 
       money = calculator.getTotal();
       updateMoneyString();
