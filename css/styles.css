@@ -7,6 +7,10 @@ body {
   margin-right: -12px;
 }
 
+.btn:hover {
+  cursor:pointer;
+}
+
 .row:before,
 .row:after {
   content: "";

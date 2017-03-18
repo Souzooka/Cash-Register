@@ -65,10 +65,11 @@ window.onload = function() {
       decimalIndex++;
     }
 
-    if (Number(moneyStr) >= 1e+14) {
+    if (Number(moneyStr) >= 1e+14 || isNaN(Number(moneyStr))) {
       alert("Buffer Overflow Error!");
-      money = 0;
       moneyStr = "0";
+      calculator.load(0);
+      calculator.saveMemory();
     }
 
     moneyStr = Number(moneyStr).toFixed(2);
@@ -99,9 +100,6 @@ window.onload = function() {
   function parseMoney() {
     return parseFloat(display.innerHTML.slice(2));
   }
-
-  updateASCIIDisplay(String(2198.87));
-
 
   document.getElementById("button0").addEventListener("click", function(){
     updateASCIIDisplay("0");
