@@ -14,6 +14,7 @@ window.onload = function() {
   var originalDisplayStr = "[$0.00_______________________]";
   var calcCheck = false;
   var promptDisplayClear = true;
+  var equalsCheck = false;
 
   // if we pass in a number (as a result of calc) as a string, we can load a number straight into the display
   // e.g. updateASCIIDisplay(String(2198.87));
@@ -87,10 +88,11 @@ window.onload = function() {
     decimal = false;
     decimalIndex = 0;
     display.innerHTML = originalDisplayStr;
-    if (!promptDisplayClear) {
+    if (!promptDisplayClear && !equalsCheck) {
       calculator.load(0);
       calculator.saveMemory();
     }
+    equalsCheck = true;
     promptDisplayClear = false;
   }
 
@@ -139,6 +141,7 @@ window.onload = function() {
   });
   document.getElementById("buttonClear").addEventListener("click", function(){
     promptDisplayClear = false;
+    equalsCheck = false;
     clearDisplay();
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
@@ -284,6 +287,14 @@ window.onload = function() {
     calcCheck = true;
     updateASCIIDisplay(String(calculator.getTotal()));
 
+  });
+  document.getElementById("buttonEquals").addEventListener("click", function(){
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(parseMoney());
+    calculator.saveMemory();
+    calcCheck = true;
+    equalsCheck = true;
+    updateASCIIDisplay(String(calculator.getTotal()));
   });
 
 
