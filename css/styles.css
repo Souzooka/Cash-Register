@@ -1,4 +1,11 @@
+body {
+  font-family: 'Inconsolata', monospace;
+  font-size: 38px;
+}
 
+#button00 {
+  margin-right: -10px;
+}
 
 .row:before,
 .row:after {
@@ -8,24 +15,25 @@
 }
 
 .panel{
-  padding-left:10px;
+  padding-left:30px;
   padding-top:10px;
 }
 
 .register-container {
-  max-width: 530px;
+  max-width: 800px;
 }
 
 .grid-container {
     padding: 10px;
     width: 100%;
-    max-width: 510px;
+    max-width: 780px;
     max-height: 160px;
 }
 
 .col-sm-1 {
   float: left;
-  padding: 5px;
+  padding-left: 20px;
+  padding-bottom: 5px;
   min-width: 8.33333%;
   min-height: 1px;
 }
@@ -33,5 +41,5 @@
 .col-md-offset-3 {
   /* hardcoded */
   position: relative;
-  left: 31%;
+  left: 33%;
 }
