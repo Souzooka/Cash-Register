@@ -12,12 +12,24 @@ window.onload = function() {
   var decimal = false;
   var decimalIndex = 0;
   var originalDisplayStr = "[$0.00_______________________]";
+  var calcCheck = false;
+  var promptDisplayClear = true;
 
   // if we pass in a number (as a result of calc) as a string, we can load a number straight into the display
   // e.g. updateASCIIDisplay(String(2198.87));
   function updateASCIIDisplay(numStr) {
 
-    if (Number(numStr) !== Math.round(Number(numStr))) {
+    if (promptDisplayClear) {
+      clearDisplay();
+    }
+
+    if (calcCheck) {
+       calcCheck = false;
+       promptDisplayClear = true;
+       display.innerHTML = originalDisplayStr;
+    }
+
+    if (Number(numStr) !== Math.round(Number(numStr)) && !calcCheck) {
       if (String(numStr).length - String(Math.round(Number(numStr))).length === 3) {
         decimalIndex = 2;
       } else {
@@ -25,6 +37,7 @@ window.onload = function() {
       }
       moneyStr = numStr;
       decimal = true;
+      calcCheck = true;
     }
     else if (numStr && !decimal) {
 
@@ -74,6 +87,11 @@ window.onload = function() {
     decimal = false;
     decimalIndex = 0;
     display.innerHTML = originalDisplayStr;
+    if (!promptDisplayClear) {
+      calculator.load(0);
+      calculator.saveMemory();
+    }
+    promptDisplayClear = false;
   }
 
   function parseMoney() {
@@ -120,6 +138,7 @@ window.onload = function() {
     decimal = true;
   });
   document.getElementById("buttonClear").addEventListener("click", function(){
+    promptDisplayClear = false;
     clearDisplay();
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
@@ -132,6 +151,139 @@ window.onload = function() {
   });
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
     updateASCIIDisplay(String(storedMoney));
+  });
+  document.getElementById("buttonMultiply").addEventListener("click", function(){
+
+    if (calculator.recallMemory() === 0) {
+      calculator.loadMemory(parseMoney());
+      calculatorFunction = calculator.multiply;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    if (parseMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.multiply;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
+      return null;
+    }
+
+    if (calculatorFunction !== calculator.multiply) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(parseMoney());
+      calculator.saveMemory();
+      calculatorFunction = calculator.multiply;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(parseMoney());
+    calculator.saveMemory();
+    calcCheck = true;
+    updateASCIIDisplay(String(calculator.getTotal()));
+
+  });
+
+  document.getElementById("buttonDivide").addEventListener("click", function(){
+
+    if (calculator.recallMemory() === 0) {
+      calculator.loadMemory(parseMoney());
+      calculatorFunction = calculator.divide;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    if (parseMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.divide;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
+      return null;
+    }
+
+    if (calculatorFunction !== calculator.divide) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(parseMoney());
+      calculator.saveMemory();
+      calculatorFunction = calculator.divide;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(parseMoney());
+    calculator.saveMemory();
+    calcCheck = true;
+    updateASCIIDisplay(String(calculator.getTotal()));
+
+  });
+  document.getElementById("buttonSubtract").addEventListener("click", function(){
+
+    if (calculator.recallMemory() === 0) {
+      calculator.loadMemory(parseMoney());
+      calculatorFunction = calculator.subtract;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    if (parseMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.subtract;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
+      return null;
+    }
+
+    if (calculatorFunction !== calculator.subtract) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(parseMoney());
+      calculator.saveMemory();
+      calculatorFunction = calculator.subtract;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(parseMoney());
+    calculator.saveMemory();
+    calcCheck = true;
+    updateASCIIDisplay(String(calculator.getTotal()));
+
+  });
+  document.getElementById("buttonAdd").addEventListener("click", function(){
+
+    if (calculator.recallMemory() === 0) {
+      calculator.loadMemory(parseMoney());
+      calculatorFunction = calculator.add;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    if (parseMoney() === 0 && calculatorFunction === calculator.divide) {
+      calculatorFunction = calculator.add;
+      window.location = "http://i.imgur.com/6nU4X8Q.jpg";
+      return null;
+    }
+
+    if (calculatorFunction !== calculator.add) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(parseMoney());
+      calculator.saveMemory();
+      calculatorFunction = calculator.add;
+      calcCheck = true;
+      updateASCIIDisplay(String(calculator.getTotal()));
+      return null;
+    }
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(parseMoney());
+    calculator.saveMemory();
+    calcCheck = true;
+    updateASCIIDisplay(String(calculator.getTotal()));
+
   });
 
 
