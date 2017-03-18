@@ -10,12 +10,18 @@ window.onload = function() {
   var decimal = false;
   var originalDisplayStr = "[$0.00_______________________]";
 
+  // if we pass in a number (as a result of calc) as a string, we can load a number straight into the display
+  // e.g. updateASCIIDisplay(String(2198.87));
   function updateASCIIDisplay(numStr) {
 
-    moneyStr = display.innerHTML.slice(2);
-    moneyStr = String(parseFloat(moneyStr));
+    if (Number(numStr) !== Math.round(Number(numStr))) {
+      moneyStr = numStr;
+    }
+    else if (numStr && !decimal) {
 
-    if (numStr && !decimal) {
+      moneyStr = display.innerHTML.slice(2);
+      moneyStr = String(parseFloat(moneyStr));
+
       moneyStr += numStr;
     }
     else if (false) {
@@ -50,6 +56,7 @@ window.onload = function() {
     return parseFloat(display.innerHTML.slice(2));
   }
 
+  updateASCIIDisplay(String(2198.87));
 
 
   document.getElementById("button0").addEventListener("click", function(){
