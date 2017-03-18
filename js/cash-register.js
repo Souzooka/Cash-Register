@@ -19,6 +19,11 @@ window.onload = function() {
     tempDisplay = calculator.getTotal();
     display.innerHTML = `$${tempDisplay.toFixed(2)}`;
     tempDisplayActive = true;
+    displayDollars = "0";
+    displayCents = "00";
+    decimal = false;
+    decimalIndex = 0;
+    negative = "";
   }
 
   function updateMoney() {
@@ -56,9 +61,6 @@ window.onload = function() {
   function updateDisplay(numStr) {
 
     if (tempDisplayActive) {
-      display.innerHTML = "$0.00";
-      displayCents = "00";
-      displayDollars = "0";
       tempDisplayActive = false;
     }
 
