@@ -8,10 +8,18 @@ window.onload = function() {
   var negative = "";
   var displayDollars = "0";
   var displayCents = "00";
+  var tempDisplay = 0;
+  var tempDisplayActive = true;
   var decimal = false;
   var decimalIndex = 0;
   var operatorPressed = false;
   calculator.load(0);
+
+  function displayTempMoney() {
+    tempDisplay = calculator.getTotal();
+    display.innerHTML = `$${tempDisplay.toFixed(2)}`;
+    tempDisplayActive = true;
+  }
 
   function updateMoney() {
     money = Number(displayDollars) + Number(displayCents / 100);
@@ -46,6 +54,14 @@ window.onload = function() {
     }
   }
   function updateDisplay(numStr) {
+
+    if (tempDisplayActive) {
+      display.innerHTML = "$0.00";
+      displayCents = "00";
+      displayDollars = "0";
+      tempDisplayActive = false;
+    }
+
     if (numStr) {
       if (decimal && checkLeadingNumbers()) {
         displayCents = String(displayCents).substr(0, decimalIndex) + numStr + String(displayCents).substr(decimalIndex + 1);
@@ -124,7 +140,7 @@ window.onload = function() {
       // inject this shit directly into memory
       calculator.loadMemory(updateMoney());
       calculatorFunction = calculator.add;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -139,7 +155,7 @@ window.onload = function() {
       calculatorFunction(updateMoney());
       calculator.saveMemory();
       calculatorFunction = calculator.add;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -149,14 +165,14 @@ window.onload = function() {
     calculatorFunction(updateMoney());
     calculator.saveMemory();
 
-    clearDisplay();
+    displayTempMoney();
   });
   document.getElementById("buttonMultiply").addEventListener("click", function(){
 
     if (calculator.recallMemory() === 0) {
       calculator.loadMemory(updateMoney());
       calculatorFunction = calculator.multiply;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -171,7 +187,7 @@ window.onload = function() {
       calculatorFunction(updateMoney());
       calculator.saveMemory();
       calculatorFunction = calculator.multiply;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -179,7 +195,7 @@ window.onload = function() {
     calculatorFunction(updateMoney());
     calculator.saveMemory();
 
-    clearDisplay();
+    displayTempMoney();
 
   });
   document.getElementById("buttonSubtract").addEventListener("click", function(){
@@ -187,7 +203,7 @@ window.onload = function() {
     if (calculator.recallMemory() === 0) {
       calculator.loadMemory(updateMoney());
       calculatorFunction = calculator.subtract;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -202,7 +218,7 @@ window.onload = function() {
       calculatorFunction(updateMoney());
       calculator.saveMemory();
       calculatorFunction = calculator.subtract;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -210,14 +226,14 @@ window.onload = function() {
     calculatorFunction(updateMoney());
     calculator.saveMemory();
 
-    clearDisplay();
+    displayTempMoney();
   });
   document.getElementById("buttonDivide").addEventListener("click", function(){
 
     if (calculator.recallMemory() === 0) {
       calculator.loadMemory(updateMoney());
       calculatorFunction = calculator.divide;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -232,7 +248,7 @@ window.onload = function() {
       calculatorFunction(updateMoney());
       calculator.saveMemory();
       calculatorFunction = calculator.divide;
-      clearDisplay();
+      displayTempMoney();
       return null;
     }
 
@@ -240,7 +256,7 @@ window.onload = function() {
     calculatorFunction(updateMoney());
     calculator.saveMemory();
 
-    clearDisplay();
+    displayTempMoney();
   });
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
     money = storedMoney;
