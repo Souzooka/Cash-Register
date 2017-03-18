@@ -1,6 +1,4 @@
-body {
-  background-color: white;
-}
+
 
 .row:before,
 .row:after {
@@ -10,16 +8,11 @@ body {
 }
 
 .panel{
-  padding-left: 10px;
-  font-size: 36px;
-  font-family: 'Inconsolata', monospace;
-  background-color: #99CC99;
-  max-width: 520px;
-  border-bottom: 1px solid;
+  padding-left:10px;
+  padding-top:10px;
 }
 
 .register-container {
-  border-style: solid;
   max-width: 530px;
 }
 
@@ -28,7 +21,6 @@ body {
     width: 100%;
     max-width: 510px;
     max-height: 160px;
-    background-color: #8a8e96;
 }
 
 .col-sm-1 {
@@ -41,49 +33,5 @@ body {
 .col-md-offset-3 {
   /* hardcoded */
   position: relative;
-  left: 64.8%;
-}
-
-.btn {
-  width: 100px;
-  height: 30px;
-}
-
-.btn-thin {
-  height: 20px;
-  width:60px;
-  position: relative;
-  background-color: #66BCFF;
-  border-radius: 50%;
-  border: 1px solid grey;
-
-}
-
-.btn-number {
-  border-radius: 2px;
-}
-
-.btn-register {
-  border-radius: 2px;
-}
-
-#buttonDivide {
-  position: relative;
-}
-#buttonMultiply {
-  position: relative;
-  bottom: 7.5px;
-}
-#buttonSubtract {
-  position: relative;
-  bottom: 15px;
-}
-#buttonAdd {
-  position: relative;
-  bottom: 22.5px;
-}
-#buttonEquals {
-  position: relative;
-  bottom: 30px;
-  background-color: #FFAAAA;
+  left: 31%;
 }
