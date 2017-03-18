@@ -160,6 +160,7 @@ window.onload = function() {
       calculatorFunction = calculator.multiply;
       calcCheck = true;
       updateASCIIDisplay(String(calculator.getTotal()));
+      clearDisplay();
       return null;
     }
 
@@ -193,6 +194,7 @@ window.onload = function() {
       calculator.loadMemory(parseMoney());
       calculatorFunction = calculator.divide;
       calcCheck = true;
+      clearDisplay();
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
@@ -226,6 +228,7 @@ window.onload = function() {
       calculator.loadMemory(parseMoney());
       calculatorFunction = calculator.subtract;
       calcCheck = true;
+      clearDisplay();
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
@@ -259,6 +262,7 @@ window.onload = function() {
       calculator.loadMemory(parseMoney());
       calculatorFunction = calculator.add;
       calcCheck = true;
+      clearDisplay();
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
