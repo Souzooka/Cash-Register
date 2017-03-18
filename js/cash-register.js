@@ -65,16 +65,13 @@ window.onload = function() {
     }
 
     if (numStr) {
-      if (decimal && checkLeadingNumbers()) {
+      if (decimal && checkLeadingNumbers() && numStr !== "00") {
         displayCents = String(displayCents).substr(0, decimalIndex) + numStr + String(displayCents).substr(decimalIndex + 1);
         if (numStr === "0" && decimalIndex <= 1) {
           decimalIndex++;
         }
         else if (numStr !== "0") {
           decimalIndex++;
-        }
-        if (numStr === "00") {
-          decimalIndex += 2;
         }
       }
       else if (!decimal) {
