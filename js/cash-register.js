@@ -86,6 +86,12 @@ window.onload = function() {
   }
   document.getElementById("buttonClear").addEventListener("click", function(){
     clearDisplay();
+
+    // CALC LOGIC
+    calculator.load(0);
+    calculator.saveMemory();
+
+
   });
   document.getElementById("buttonEquals").addEventListener("click", function(){
     if (calculatorFunction === null) {
@@ -96,60 +102,125 @@ window.onload = function() {
         calculatorFunction = null;
         return -1;
       }
+
+
+      // CALC LOGIC
+      calculator.load(calculator.recallMemory());
       calculatorFunction(updateMoney());
+
+
+
       money = calculator.getTotal();
       updateMoneyString();
       decimal = false;
       decimalIndex = 0;
       calculatorFunction = null;
       operatorPressed = false;
+
+      // CALC LOGIC
       calculator.load(0);
       calculator.saveMemory();
     }
   });
   document.getElementById("buttonAdd").addEventListener("click", function(){
 
-    calculatorFunction = calculator.add;
+    // FIRST TIME USE AFTER CLEAR/EQUALS OR if operating off of number 0, 0 isn't important
     if (calculator.recallMemory() === 0) {
-      calculator.load(updateMoney());
-      calculator.saveMemory();
-    } else {
-      calculator.load(updateMoney());
-      calculatorFunction(calculator.recallMemory());
-      calculator.saveMemory();
+      // inject this shit directly into memory
+      calculator.loadMemory(updateMoney());
+      calculatorFunction = calculator.add;
+      clearDisplay();
+      return null;
     }
+
+    if (calculatorFunction !== calculator.add) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(updateMoney());
+      calculator.saveMemory();
+      calculatorFunction = calculator.add;
+      clearDisplay();
+      return null;
+    }
+
+    // WE SHOULD ONLY REACH THIS POINT IF WE HAVE CLICKED ON ADD, AND OUR PREVIOUS ACTION WAS TO ADD
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(updateMoney());
+    calculator.saveMemory();
+
     clearDisplay();
   });
   document.getElementById("buttonMultiply").addEventListener("click", function(){
 
-    if (calculatorFunction !== calculator.multiply) {
-      calculatorFunction(calculator.recallMemory());
+    if (calculator.recallMemory() === 0) {
+      calculator.loadMemory(updateMoney());
       calculatorFunction = calculator.multiply;
       clearDisplay();
       return null;
     }
 
-    calculatorFunction = calculator.multiply;
-
-    if (calculator.recallMemory() === 0) {
-      calculator.load(updateMoney());
+    if (calculatorFunction !== calculator.multiply) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(updateMoney());
       calculator.saveMemory();
-    } else {
-      calculator.load(updateMoney());
-      calculatorFunction(calculator.recallMemory());
-      calculator.saveMemory();
+      calculatorFunction = calculator.multiply;
+      clearDisplay();
+      return null;
     }
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(updateMoney());
+    calculator.saveMemory();
+
     clearDisplay();
 
   });
   document.getElementById("buttonSubtract").addEventListener("click", function(){
-    calculator.load(updateMoney());
-    calculatorFunction = calculator.subtract;
+
+    if (calculator.recallMemory() === 0) {
+      calculator.loadMemory(updateMoney());
+      calculatorFunction = calculator.subtract;
+      clearDisplay();
+      return null;
+    }
+
+    if (calculatorFunction !== calculator.subtract) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(updateMoney());
+      calculator.saveMemory();
+      calculatorFunction = calculator.subtract;
+      clearDisplay();
+      return null;
+    }
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(updateMoney());
+    calculator.saveMemory();
+
     clearDisplay();
   });
   document.getElementById("buttonDivide").addEventListener("click", function(){
-    calculator.load(updateMoney());
-    calculatorFunction = calculator.divide;
+
+    if (calculator.recallMemory() === 0) {
+      calculator.loadMemory(updateMoney());
+      calculatorFunction = calculator.divide;
+      clearDisplay();
+      return null;
+    }
+
+    if (calculatorFunction !== calculator.divide) {
+      calculator.load(calculator.recallMemory());
+      calculatorFunction(updateMoney());
+      calculator.saveMemory();
+      calculatorFunction = calculator.divide;
+      clearDisplay();
+      return null;
+    }
+
+    calculator.load(calculator.recallMemory());
+    calculatorFunction(updateMoney());
+    calculator.saveMemory();
+
     clearDisplay();
   });
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
