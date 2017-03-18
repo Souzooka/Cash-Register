@@ -291,10 +291,11 @@ window.onload = function() {
   document.getElementById("buttonEquals").addEventListener("click", function(){
     calculator.load(calculator.recallMemory());
     calculatorFunction(parseMoney());
-    calculator.saveMemory();
     calcCheck = true;
     equalsCheck = true;
     updateASCIIDisplay(String(calculator.getTotal()));
+    calculator.load(0);
+    calculator.saveMemory();
   });
 
 
