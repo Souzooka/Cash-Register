@@ -10,6 +10,8 @@ window.onload = function() {
   var displayCents = "00";
   var decimal = false;
   var decimalIndex = 0;
+  var operatorPressed = false;
+  calculator.load(0);
 
   function updateMoney() {
     money = Number(displayDollars) + Number(displayCents / 100);
@@ -91,20 +93,26 @@ window.onload = function() {
     } else {
       if (calculatorFunction === calculator.divide && updateMoney() === 0) {
         alert("User attempted to divide by 0, authorities alerted.") /* a wild inline comment appeared */;
-calculatorFunction = null;
+        calculatorFunction = null;
         return -1;
       }
-      calculatorFunction(updateMoney());
+    calculatorFunction(updateMoney());
       money = calculator.getTotal();
       updateMoneyString();
       decimal = false;
       decimalIndex = 0;
       calculatorFunction = null;
+      operatorPressed = false;
+      calculator.load(0);
+      calculator.saveMemory();
     }
   });
   document.getElementById("buttonAdd").addEventListener("click", function(){
-    calculator.load(updateMoney());
+
     calculatorFunction = calculator.add;
+    calculator.load(updateMoney());
+    calculatorFunction(calculator.recallMemory());
+    calculator.saveMemory();
     clearDisplay();
   });
   document.getElementById("buttonMultiply").addEventListener("click", function(){

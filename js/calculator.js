@@ -111,6 +111,10 @@ var calculatorModule = (function(){
     _memory -= value;
   }
 
+  function loadMemory(value) {
+    _memory = value;
+  }
+
   /**
    * Validation
    */
@@ -124,6 +128,7 @@ var calculatorModule = (function(){
 
   return {
     load,
+    loadMemory,
     getTotal,
     add,
     subtract,
