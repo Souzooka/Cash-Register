@@ -7,11 +7,10 @@ window.onload = function() {
   var moneyStr = "";
   var display = document.getElementById("registerDisplay");
   var decimal = false;
-  var originalDisplayStr = "[____________________________]";
+  var originalDisplayStr = "[$0.00_______________________]";
 
+  // Money is only updated when updateASCIIDisplay or clearDisplay is called!
   function updateASCIIDisplay(numStr) {
-
-    var numMultiplier;
 
     moneyStr = display.innerHTML.slice(2);
     moneyStr = String(parseFloat(moneyStr));
@@ -20,6 +19,9 @@ window.onload = function() {
     if (numStr && !decimal) {
       moneyStr += numStr;
     }
+    else if (false) {
+
+    }
 
     if (Number(moneyStr) >= 1e+20) {
       alert("Buffer Overflow Error!");
@@ -27,9 +29,7 @@ window.onload = function() {
       moneyStr = "0";
     }
 
-
     moneyStr = Number(moneyStr).toFixed(2);
-
 
     display.innerHTML = `[$${moneyStr}`;
 
@@ -41,9 +41,54 @@ window.onload = function() {
 
   }
 
+  function clearDisplay() {
+    money = 0;
+    moneyStr = "";
+    decimal = false;
+    display.innerHTML = originalDisplayStr;
+  }
+
+
+
+
+
+  document.getElementById("button0").addEventListener("click", function(){
+    updateASCIIDisplay("0");
+  });
+  document.getElementById("button00").addEventListener("click", function(){
+    updateASCIIDisplay("00");
+  });
+  document.getElementById("button1").addEventListener("click", function(){
+    updateASCIIDisplay("1");
+  });
+  document.getElementById("button2").addEventListener("click", function(){
+    updateASCIIDisplay("2");
+  });
+  document.getElementById("button3").addEventListener("click", function(){
+    updateASCIIDisplay("3");
+  });
+  document.getElementById("button4").addEventListener("click", function(){
+    updateASCIIDisplay("4");
+  });
+  document.getElementById("button5").addEventListener("click", function(){
+    updateASCIIDisplay("5");
+  });
+  document.getElementById("button6").addEventListener("click", function(){
+    updateASCIIDisplay("6");
+  });
+  document.getElementById("button7").addEventListener("click", function(){
+    updateASCIIDisplay("7");
+  });
   document.getElementById("button8").addEventListener("click", function(){
     updateASCIIDisplay("8");
   });
+  document.getElementById("button9").addEventListener("click", function(){
+    updateASCIIDisplay("9");
+  });
+  document.getElementById("buttonClear").addEventListener("click", function(){
+    clearDisplay();
+  });
+
 
 
 /*if (calculator.recallMemory() === 0) {
