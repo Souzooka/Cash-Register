@@ -96,7 +96,7 @@ window.onload = function() {
         calculatorFunction = null;
         return -1;
       }
-    calculatorFunction(updateMoney());
+      calculatorFunction(updateMoney());
       money = calculator.getTotal();
       updateMoneyString();
       decimal = false;
@@ -110,15 +110,37 @@ window.onload = function() {
   document.getElementById("buttonAdd").addEventListener("click", function(){
 
     calculatorFunction = calculator.add;
-    calculator.load(updateMoney());
-    calculatorFunction(calculator.recallMemory());
-    calculator.saveMemory();
+    if (calculator.recallMemory() === 0) {
+      calculator.load(updateMoney());
+      calculator.saveMemory();
+    } else {
+      calculator.load(updateMoney());
+      calculatorFunction(calculator.recallMemory());
+      calculator.saveMemory();
+    }
     clearDisplay();
   });
   document.getElementById("buttonMultiply").addEventListener("click", function(){
-    calculator.load(updateMoney());
+
+    if (calculatorFunction !== calculator.multiply) {
+      calculatorFunction(calculator.recallMemory());
+      calculatorFunction = calculator.multiply;
+      clearDisplay();
+      return null;
+    }
+
     calculatorFunction = calculator.multiply;
+
+    if (calculator.recallMemory() === 0) {
+      calculator.load(updateMoney());
+      calculator.saveMemory();
+    } else {
+      calculator.load(updateMoney());
+      calculatorFunction(calculator.recallMemory());
+      calculator.saveMemory();
+    }
     clearDisplay();
+
   });
   document.getElementById("buttonSubtract").addEventListener("click", function(){
     calculator.load(updateMoney());
