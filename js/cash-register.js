@@ -94,8 +94,6 @@ window.onload = function() {
 
   }
 
-  console.log(parseFloat("-21.2"));
-
   function clearDisplay() {
     moneyStr = "";
     decimal = false;
@@ -117,7 +115,7 @@ window.onload = function() {
 
   for (let i = 0; i < number.length; i++) {
     number[i].addEventListener("click", function(){
-      updateASCIIDisplay(this.innerHTML.slice(1, this.innerHTML.length-1));
+      updateASCIIDisplay(this.innerHTML.replace(/[\[\]'']/g,""));
     });
   }
 
