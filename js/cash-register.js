@@ -148,6 +148,8 @@ window.onload = function() {
   });
   document.getElementById("buttonDecimal").addEventListener("click", function(){
     decimal = true;
+    calcCheck = false;
+    promptDisplayClear = false;
   });
   document.getElementById("buttonClear").addEventListener("click", function(){
     promptDisplayClear = false;
