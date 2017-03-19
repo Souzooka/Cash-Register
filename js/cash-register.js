@@ -185,8 +185,10 @@ window.onload = function() {
       calculator.loadMemory(parseMoney());
       calculatorFunction = calculator.multiply;
       calcCheck = true;
+      decimal = false;
+      decimalIndex = 0;
       updateASCIIDisplay(String(calculator.getTotal()));
-      clearDisplay();
+
       return null;
     }
 
@@ -202,6 +204,8 @@ window.onload = function() {
       calculator.saveMemory();
       calculatorFunction = calculator.multiply;
       calcCheck = true;
+      decimal = false;
+      decimalIndex = 0;
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
@@ -210,6 +214,8 @@ window.onload = function() {
     calculatorFunction(parseMoney());
     calculator.saveMemory();
     calcCheck = true;
+    decimal = false;
+    decimalIndex = 0;
     updateASCIIDisplay(String(calculator.getTotal()));
 
   });
@@ -237,6 +243,8 @@ window.onload = function() {
       calculator.saveMemory();
       calculatorFunction = calculator.divide;
       calcCheck = true;
+      decimal = false;
+      decimalIndex = 0;
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
@@ -245,6 +253,8 @@ window.onload = function() {
     calculatorFunction(parseMoney());
     calculator.saveMemory();
     calcCheck = true;
+    decimal = false;
+    decimalIndex = 0;
     updateASCIIDisplay(String(calculator.getTotal()));
 
   });
@@ -271,6 +281,8 @@ window.onload = function() {
       calculator.saveMemory();
       calculatorFunction = calculator.subtract;
       calcCheck = true;
+      decimal = false;
+      decimalIndex = 0;
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
@@ -279,6 +291,8 @@ window.onload = function() {
     calculatorFunction(parseMoney());
     calculator.saveMemory();
     calcCheck = true;
+    decimal = false;
+    decimalIndex = 0;
     updateASCIIDisplay(String(calculator.getTotal()));
 
   });
@@ -289,6 +303,8 @@ window.onload = function() {
       calculatorFunction = calculator.add;
       calcCheck = true;
       clearDisplay();
+      decimal = false;
+      decimalIndex = 0;
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
@@ -305,6 +321,8 @@ window.onload = function() {
       calculator.saveMemory();
       calculatorFunction = calculator.add;
       calcCheck = true;
+      decimal = false;
+      decimalIndex = 0;
       updateASCIIDisplay(String(calculator.getTotal()));
       return null;
     }
@@ -313,12 +331,16 @@ window.onload = function() {
     calculatorFunction(parseMoney());
     calculator.saveMemory();
     calcCheck = true;
+    decimal = false;
+    decimalIndex = 0;
     updateASCIIDisplay(String(calculator.getTotal()));
 
   });
   document.getElementById("buttonEquals").addEventListener("click", function(){
     calculator.load(calculator.recallMemory());
     calculatorFunction(parseMoney());
+    decimal = false;
+    decimalIndex = 0;
     calcCheck = true;
     equalsCheck = true;
     updateASCIIDisplay(String(calculator.getTotal()));
