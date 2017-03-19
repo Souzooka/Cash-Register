@@ -113,39 +113,14 @@ window.onload = function() {
     return parseFloat(display.innerHTML.slice(2));
   }
 
-  document.getElementById("button0").addEventListener("click", function(){
-    updateASCIIDisplay("0");
-  });
-  document.getElementById("button00").addEventListener("click", function(){
-    updateASCIIDisplay("00");
-  });
-  document.getElementById("button1").addEventListener("click", function(){
-    updateASCIIDisplay("1");
-  });
-  document.getElementById("button2").addEventListener("click", function(){
-    updateASCIIDisplay("2");
-  });
-  document.getElementById("button3").addEventListener("click", function(){
-    updateASCIIDisplay("3");
-  });
-  document.getElementById("button4").addEventListener("click", function(){
-    updateASCIIDisplay("4");
-  });
-  document.getElementById("button5").addEventListener("click", function(){
-    updateASCIIDisplay("5");
-  });
-  document.getElementById("button6").addEventListener("click", function(){
-    updateASCIIDisplay("6");
-  });
-  document.getElementById("button7").addEventListener("click", function(){
-    updateASCIIDisplay("7");
-  });
-  document.getElementById("button8").addEventListener("click", function(){
-    updateASCIIDisplay("8");
-  });
-  document.getElementById("button9").addEventListener("click", function(){
-    updateASCIIDisplay("9");
-  });
+  var number = document.querySelectorAll("span.btn-number");
+
+  for (let i = 0; i < number.length; i++) {
+    number[i].addEventListener("click", function(){
+      updateASCIIDisplay(this.innerHTML.slice(1, this.innerHTML.length-1));
+    });
+  }
+
   document.getElementById("buttonDecimal").addEventListener("click", function(){
     decimal = true;
     calcCheck = false;
