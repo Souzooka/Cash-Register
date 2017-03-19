@@ -155,13 +155,21 @@ window.onload = function() {
     clearDisplay();
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
-    storedMoney += parseMoney();
+    if (parseMoney() < 0) {
+      alert("Cannot deposit a negative amount!");
+    } else {
+      storedMoney += parseMoney();
+    }
     promptDisplayClear = false;
     equalsCheck = false;
     clearDisplay();
   });
   document.getElementById("buttonWithdraw").addEventListener("click", function(){
-    storedMoney -= parseMoney();
+    if (storedMoney - parseMoney() < 0) {
+      alert("Insuffiencient funds. Current funds is " + storedMoney);
+    } else {
+      storedMoney -= parseMoney();
+    }
     promptDisplayClear = false;
     equalsCheck = false;
     clearDisplay();
