@@ -15,6 +15,7 @@ window.onload = function() {
   var calcCheck = false;
   var promptDisplayClear = true;
   var equalsCheck = false;
+  var negative = "";
 
   // if we pass in a number (as a result of calc) as a string, we can load a number straight into the display
   // e.g. updateASCIIDisplay(String(2198.87));
@@ -28,6 +29,13 @@ window.onload = function() {
        calcCheck = false;
        promptDisplayClear = true;
        display.innerHTML = originalDisplayStr;
+    }
+
+    if (Number(numStr) < 0) {
+      numStr = String(Number(numStr) * - 1);
+      negative = "-";
+    } else {
+      negative = "";
     }
 
     if (Number(numStr) !== Math.round(Number(numStr)) && !calcCheck) {
@@ -65,6 +73,8 @@ window.onload = function() {
       decimalIndex++;
     }
 
+
+
     if (Number(moneyStr) >= 1e+14 || isNaN(Number(moneyStr))) {
       alert("Buffer Overflow Error!");
       moneyStr = "0";
@@ -74,7 +84,7 @@ window.onload = function() {
 
     moneyStr = Number(moneyStr).toFixed(2);
 
-    display.innerHTML = `[$${moneyStr}`;
+    display.innerHTML = `[$${negative}${moneyStr}`;
 
     // display.length should end with 30, we cap it with a "]"
     while (display.innerHTML.length < 29) {
@@ -83,6 +93,8 @@ window.onload = function() {
     display.innerHTML += "]";
 
   }
+
+  console.log(parseFloat("-21.2"));
 
   function clearDisplay() {
     moneyStr = "";
@@ -144,10 +156,14 @@ window.onload = function() {
   });
   document.getElementById("buttonDeposit").addEventListener("click", function(){
     storedMoney += parseMoney();
+    promptDisplayClear = false;
+    equalsCheck = false;
     clearDisplay();
   });
   document.getElementById("buttonWithdraw").addEventListener("click", function(){
     storedMoney -= parseMoney();
+    promptDisplayClear = false;
+    equalsCheck = false;
     clearDisplay();
   });
   document.getElementById("buttonGetBalance").addEventListener("click", function(){
