@@ -1,6 +1,7 @@
 window.onload = function() {
   "use strict";
   var calculationHappened = false;
+  var decimal = false;
   var calculator = new parsingCalculatorModule();
   var decimalIndex = false;
   var numbersArr = [];
@@ -21,25 +22,35 @@ window.onload = function() {
       display.innerHTML = "";
     }
 
-    displayStr = display.innerHTML.replace(/[\[\]_$'']/g," ").trim();
+    displayStr = parseDisplay();
+
+    if (str === "." && displayStr === "") {
+      displayStr = "0.";
+      decimal = true;
+    }
 
     // checking if an operator is being added after another
-    if (isNaN(Number(str)) && (isNaN(Number(displayStr[displayStr.length-1])) && displayStr[displayStr.length-1] !== ".")) {
+    else if (isNaN(Number(str)) && (isNaN(Number(displayStr[displayStr.length-1])) && displayStr[displayStr.length-1] !== ".")) {
       alert("Error: Cannot add one operator after another or add an operator without an argument!");
       clearDisplay();
       return null;
     }
 
-    else if (!isNaN(Number(str)) && displayStr[displayStr.length-1] === ".") {
+    else if (isNaN(Number(str)) && displayStr[displayStr.length-1] === ".") {
       displayStr = displayStr.substr(0, displayStr.length-1);
     }
 
     else if (isNaN(Number(str))) {
       if (str === ".") {
-        displayStr += ".";
+        if (!decimal) {
+          displayStr += ".";
+          decimal = true;
+        }
       } else {
         displayStr += " " + str;
+        decimal = false;
       }
+      calculationHappened = false;
     }
 
     else if (isNaN(Number(displayStr[displayStr.length-1])) && !isNaN(Number(str)) && displayStr[displayStr.length-1] !== ".") {
@@ -70,7 +81,7 @@ window.onload = function() {
 
   for (let i = 0; i < number.length; i++) {
     number[i].addEventListener("click", function(){
-      if (calculationHappened) {
+      if (calculationHappened && this.id !== "buttonDecimal") {
         clearDisplay();
       }
       addToDisplay(this.innerHTML.replace(/[\[\]'']/g,""));
