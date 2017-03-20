@@ -3,7 +3,6 @@ window.onload = function() {
   var calculationHappened = false;
   var decimal = false;
   var calculator = new parsingCalculatorModule();
-  var displayString = "";
   var originalDisplayString = "[$0__________________________]";
   var display = document.getElementById("registerDisplay");
   var number = document.querySelectorAll("span.btn-number");
@@ -13,6 +12,11 @@ window.onload = function() {
   function addToDisplay(str) {
 
     var displayStr;
+
+    if (Number(str) >= 1e+14) {
+      alert("Buffer Overflow Error!");
+      return null;
+    }
 
     if (display.innerHTML === originalDisplayString || parseDisplay() === "0" || parseDisplay() === "00" || parseDisplay() === "Infinity") {
       display.innerHTML = "";
@@ -27,7 +31,6 @@ window.onload = function() {
 
     // checking if an operator is being added after another
     else if (isNaN(Number(str)) && (isNaN(Number(displayStr[displayStr.length-1])) && displayStr[displayStr.length-1] !== ".")) {
-      console.log(displayStr);
       if (str === ".") {
         displayStr += " 0.";
         decimal = true;
@@ -150,12 +153,24 @@ window.onload = function() {
   document.querySelector("#buttonDeposit").addEventListener("click", function(){
     var total = calculator.calculate(parseDisplay());
     clearDisplay();
-    storedMoney += total;
+    if (total < 0) {
+      alert("Cannot deposit a negative amount of money!");
+    }
+    else if (total > 1e+14) {
+      alert("Buffer Overflow Error!");
+      clearDisplay();
+    } else {
+      storedMoney += total;
+    }
   });
   document.querySelector("#buttonWithdraw").addEventListener("click", function(){
     var total = calculator.calculate(parseDisplay());
     clearDisplay();
-    storedMoney -= total;
+    if (total > storedMoney) {
+      alert("Cannot withdraw more than is stored! The stored amount of money is $" + storedMoney + ".");
+    } else {
+      storedMoney -= total;
+    }
   });
   document.querySelector("#buttonGetBalance").addEventListener("click", function(){
     clearDisplay();
