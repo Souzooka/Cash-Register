@@ -12,8 +12,8 @@ window.onload = function() {
   function addToDisplay(str) {
 
     var displayStr;
-
-    if (display.innerHTML === originalDisplayString || parseDisplay() === "0") {
+    
+    if (display.innerHTML === originalDisplayString || parseDisplay() === "0" || parseDisplay() === "Infinity") {
       display.innerHTML = "";
     }
 
