@@ -3,6 +3,26 @@
 
 function parsingCalculatorModule() {
 
+	function add(op1, op2) {
+		return op1 + op2;
+	}
+
+	function subtract(op1, op2) {
+		return op1 - op2;
+	}
+
+	function divide(op1, op2) {
+		return op1 / op2;
+	}
+
+	function multiply(op1, op2) {
+		return op1 * op2;
+	}
+
+	function exponent(op1, op2) {
+		return Math.pow(op1, op2);
+	}
+
 	// input calcString as a whitespace-seperated string, the first part of the string must be a number
 	this.calculate = function(calcString) {
 		var numArr = [];
@@ -12,26 +32,6 @@ function parsingCalculatorModule() {
 		var operator2 = 0;
 		var operation = "";
 		var calculation = null;
-
-		function add(op1, op2) {
-			return op1 + op2;
-		}
-
-		function subtract(op1, op2) {
-			return op1 - op2;
-		}
-
-		function divide(op1, op2) {
-			return op1 / op2;
-		}
-
-		function multiply(op1, op2) {
-			return op1 * op2;
-		}
-
-		function exponent(op1, op2) {
-			return Math.pow(op1, op2);
-		}
 
 		calcString = calcString.split(" ");
 
@@ -86,5 +86,5 @@ function parsingCalculatorModule() {
 var calculator = new parsingCalculatorModule();
 var calculator2  = new parsingCalculatorModule();
 
-console.log(calculator.calculate("10 ^ 3")); // 7.33 repeating
-console.log(calculator2.calculate("8 * 9 + 2 - 2 / 2")); // 36
+console.log(calculator.calculate("10 ^ 3 * 3"));
+console.log(calculator2.calculate("8 * 9 + 2 - 2 / 2"));
