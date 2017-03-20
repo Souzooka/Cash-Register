@@ -31,9 +31,13 @@ window.onload = function() {
 
     // checking if an operator is being added after another
     else if (isNaN(Number(str)) && (isNaN(Number(displayStr[displayStr.length-1])) && displayStr[displayStr.length-1] !== ".")) {
-      alert("Error: Cannot add one operator after another or add an operator without an argument!");
-      clearDisplay();
-      return null;
+      if (str === ".") {
+        displayStr += " 0.";
+      } else {
+        alert("Error: Cannot add one operator after another or add an operator without an argument!");
+        clearDisplay();
+        return null;
+      }
     }
 
     else if (isNaN(Number(str)) && displayStr[displayStr.length-1] === ".") {
@@ -93,5 +97,9 @@ window.onload = function() {
       addToDisplay(this.innerHTML.replace(/[\[\]'']/g,""));
     });
   }
+
+  document.querySelector("#buttonClear").addEventListener("click", function(){
+    clearDisplay();
+  });
 
 };
