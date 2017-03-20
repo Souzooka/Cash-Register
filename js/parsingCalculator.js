@@ -25,13 +25,13 @@ function parsingCalculatorModule() {
 
 	// input calcString as a whitespace-seperated string, the first part of the string must be a number
 	this.calculate = function(calcString) {
+		var total;
+		var operator1;
+		var operator2;
+		var operation;
+		var calculation;
 		var numArr = [];
 		var operationArr = [];
-		var total = 0;
-		var operator1 = 0;
-		var operator2 = 0;
-		var operation = "";
-		var calculation = null;
 
 		calcString = calcString.split(" ");
 
