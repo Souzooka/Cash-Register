@@ -3,17 +3,12 @@ window.onload = function() {
   var calculationHappened = false;
   var decimal = false;
   var calculator = new parsingCalculatorModule();
-  var decimalIndex = false;
-  var numbersArr = [];
-  var operatorsArr = [];
   var displayString = "";
   var originalDisplayString = "[$0__________________________]";
   var display = document.getElementById("registerDisplay");
   var number = document.querySelectorAll("span.btn-number");
   var operation = document.querySelectorAll("span.btn-operation");
-  display.innerHTML = originalDisplayString;
-
-
+  
   function addToDisplay(str) {
 
     var displayStr;
@@ -101,5 +96,8 @@ window.onload = function() {
   document.querySelector("#buttonClear").addEventListener("click", function(){
     clearDisplay();
   });
+
+
+  display.innerHTML = originalDisplayString;
 
 };
