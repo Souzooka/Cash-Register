@@ -12,7 +12,7 @@ window.onload = function() {
   function addToDisplay(str) {
 
     var displayStr;
-    
+
     if (display.innerHTML === originalDisplayString || parseDisplay() === "0" || parseDisplay() === "Infinity") {
       display.innerHTML = "";
     }
@@ -42,15 +42,17 @@ window.onload = function() {
 
     else if (isNaN(Number(str))) {
       if (str === ".") {
-        if (!decimal) {
+        if (!decimal && Number(parseDisplay() === Math.round(Number(parseDisplay())))) {
           displayStr += ".";
           decimal = true;
+          calculationHappened = false;
         }
-      } else {
+      } 
+      else if (decimal) {
         displayStr += " " + str;
         decimal = false;
+        calculationHappened = false;
       }
-      calculationHappened = false;
     }
 
     else if (isNaN(Number(displayStr[displayStr.length-1])) && !isNaN(Number(str)) && displayStr[displayStr.length-1] !== ".") {
