@@ -29,6 +29,10 @@ function parsingCalculatorModule() {
 			return op1 * op2;
 		}
 
+		function exponent(op1, op2) {
+			return Math.pow(op1, op2);
+		}
+
 		calcString = calcString.split(" ");
 
 		for (let i = 0; i < calcString.length; i += 2) {
@@ -57,6 +61,9 @@ function parsingCalculatorModule() {
 				case "/":
 					calculation = divide;
 					break;
+				case "^":
+					calculation = exponent;
+					break;
 				default:
 					throw new Error("Invalid calculator input!");
 			}
@@ -79,5 +86,5 @@ function parsingCalculatorModule() {
 var calculator = new parsingCalculatorModule();
 var calculator2  = new parsingCalculatorModule();
 
-console.log(calculator.calculate("7 + 10 * 2 / 3 - 4")); // 7.33 repeating
+console.log(calculator.calculate("10 ^ 3")); // 7.33 repeating
 console.log(calculator2.calculate("8 * 9 + 2 - 2 / 2")); // 36
