@@ -5,37 +5,37 @@ function parsingCalculatorModule() {
 
 	var _answer = 0;
 
-	function add(op1, op2) {
+	function _add(op1, op2) {
 		return op1 + op2;
 	}
 
-	function subtract(op1, op2) {
+	function _subtract(op1, op2) {
 		return op1 - op2;
 	}
 
-	function divide(op1, op2) {
+	function _divide(op1, op2) {
 		return op1 / op2;
 	}
 
-	function multiply(op1, op2) {
+	function _multiply(op1, op2) {
 		return op1 * op2;
 	}
 
-	function exponent(op1, op2) {
+	function _exponent(op1, op2) {
 		return Math.pow(op1, op2);
 	}
 
-	this.getAnswer = () => {
+	this.getAnswer = function() {
 		return _answer;
 	};
 
-	function setAnswer(value) {
+	function _setAnswer(value) {
 		_answer = value;
 	}
 
 	// input calcString as a whitespace-seperated string, the first part of the string must be a number
 	// if calcString ends on an operation (e.g. "10 ^ 3 * 3 + "), it will be ignored.
-	this.calculate = (calcString) => {
+	this.calculate = function(calcString) {
 		var total;
 		var operator1;
 		var operator2;
@@ -61,19 +61,19 @@ function parsingCalculatorModule() {
 
 			switch (operation) {
 				case "+":
-					calculation = add;
+					calculation = _add;
 					break;
 				case "-":
-					calculation = subtract;
+					calculation = _subtract;
 					break;
 				case "*":
-					calculation = multiply;
+					calculation = _multiply;
 					break;
 				case "/":
-					calculation = divide;
+					calculation = _divide;
 					break;
 				case "^":
-					calculation = exponent;
+					calculation = _exponent;
 					break;
 				default:
 					throw new Error("Invalid calculator input!");
@@ -84,11 +84,11 @@ function parsingCalculatorModule() {
 		}
 
 		total = numArr[0];
-		setAnswer(total);
+		_setAnswer(total);
 		return total;
 	};
 
-	this.calculatePEMDAS = (calcString) => {
+	this.calculatePEMDAS = function(calcString) {
 		// TODO
 		return calcString.split(" ");
 	};
