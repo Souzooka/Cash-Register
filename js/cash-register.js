@@ -42,13 +42,18 @@ window.onload = function() {
 
     else if (isNaN(Number(str))) {
       if (str === ".") {
-        if (!decimal && Number(parseDisplay() === Math.round(Number(parseDisplay())))) {
-          displayStr += ".";
-          decimal = true;
-          calculationHappened = false;
+        if (!decimal) {
+          if (calculationHappened && Math.round(Number(parseDisplay())) === Number(parseDisplay())) {
+            displayStr += ".";
+            decimal = true;
+            calculationHappened = false;
+          }
+          else if (!calculationHappened) {
+            displayStr += ".";
+            decimal = true;
+          }
         }
-      } 
-      else if (decimal) {
+      } else {
         displayStr += " " + str;
         decimal = false;
         calculationHappened = false;
@@ -107,6 +112,7 @@ window.onload = function() {
     var total = calculator.calculate(parseDisplay());
     clearDisplay();
     calculationHappened = true;
+    decimal = false;
     addToDisplay(String(total));
   });
 
