@@ -13,7 +13,7 @@ window.onload = function() {
 
     var displayStr;
 
-    if (display.innerHTML === originalDisplayString || parseDisplay() === "0" || parseDisplay() === "Infinity") {
+    if (display.innerHTML === originalDisplayString || parseDisplay() === "0" || parseDisplay() === "00" || parseDisplay() === "Infinity") {
       display.innerHTML = "";
     }
 
