@@ -8,7 +8,7 @@ window.onload = function() {
   var display = document.getElementById("registerDisplay");
   var number = document.querySelectorAll("span.btn-number");
   var operation = document.querySelectorAll("span.btn-operation");
-  
+
   function addToDisplay(str) {
 
     var displayStr;
@@ -26,9 +26,13 @@ window.onload = function() {
 
     // checking if an operator is being added after another
     else if (isNaN(Number(str)) && (isNaN(Number(displayStr[displayStr.length-1])) && displayStr[displayStr.length-1] !== ".")) {
+      console.log(displayStr);
       if (str === ".") {
         displayStr += " 0.";
         decimal = true;
+      }
+      else if (displayStr === "") {
+        displayStr = "0 " + str;
       } else {
         alert("Error: Cannot add one operator after another or add an operator without an argument!");
         clearDisplay();
