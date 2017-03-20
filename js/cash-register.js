@@ -95,6 +95,8 @@ window.onload = function() {
 
     displayStr = displayStr.trim().replace(/\s/g, "_");
 
+    displayStr = "[$" + displayStr;
+
     display.innerHTML = displayStr;
 
   }
