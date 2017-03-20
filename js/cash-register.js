@@ -13,7 +13,7 @@ window.onload = function() {
 
     var displayStr;
 
-    if (display.innerHTML === originalDisplayString) {
+    if (display.innerHTML === originalDisplayString || parseDisplay() === "0") {
       display.innerHTML = "";
     }
 
@@ -58,6 +58,10 @@ window.onload = function() {
     }
 
     else if ((!isNaN(Number(displayStr[displayStr.length-1])) || displayStr[displayStr.length-1] === ".") && !isNaN(Number(str))) {
+      if (calculationHappened) {
+        calculationHappened = false;
+        displayStr = "";
+      }
       displayStr += str;
     }
 
@@ -72,7 +76,7 @@ window.onload = function() {
   function clearDisplay() {
       display.innerHTML = originalDisplayString;
       decimal = false;
-      decimalIndex = 0;
+      calculationHappened = false;
   }
 
   function parseDisplay() {
@@ -96,6 +100,12 @@ window.onload = function() {
 
   document.querySelector("#buttonClear").addEventListener("click", function(){
     clearDisplay();
+  });
+  document.querySelector("#buttonEquals").addEventListener("click", function(){
+    var total = calculator.calculate(parseDisplay());
+    clearDisplay();
+    calculationHappened = true;
+    addToDisplay(String(total));
   });
 
 
