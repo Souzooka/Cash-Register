@@ -27,7 +27,7 @@ function parsingCalculatorModule() {
 
 	this.getAnswer = () => {
 		return _answer;
-	}
+	};
 
 	function setAnswer(value) {
 		_answer = value;
@@ -94,12 +94,3 @@ function parsingCalculatorModule() {
 	};
 
 }
-
-var calculator = new parsingCalculatorModule();
-var calculator2  = new parsingCalculatorModule();
-
-calculator.calculate("10 ^ 3 * 3");
-calculator2.calculate("8 * 9 + 2 - 2 / 2");
-
-console.log(calculator.getAnswer());
-console.log(calculator2.getAnswer());
