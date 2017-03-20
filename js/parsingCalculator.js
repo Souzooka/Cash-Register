@@ -39,7 +39,7 @@ function parsingCalculatorModule() {
 			operationArr.push(calcString[i]);
 		}
 
-		while (numArr.length >= 2) {
+		while (numArr.length > 1) {
 			operator1 = numArr.shift();
 			operator2 = numArr.shift();
 			operation = operationArr.shift();
@@ -79,5 +79,5 @@ function parsingCalculatorModule() {
 var calculator = new parsingCalculatorModule();
 var calculator2  = new parsingCalculatorModule();
 
-console.log(calculator.calculate("7 + 10 * 2 / 3 - 4"));
-console.log(calculator2.calculate("8 * 9 + 2 - 2 / 2"));
+console.log(calculator.calculate("7 + 10 * 2 / 3 - 4")); // 7.33 repeating
+console.log(calculator2.calculate("8 * 9 + 2 - 2 / 2")); // 36
