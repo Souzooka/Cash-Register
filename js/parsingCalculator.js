@@ -25,13 +25,13 @@ function parsingCalculatorModule() {
 		return Math.pow(op1, op2);
 	}
 
-	this.getAnswer = function() {
-		return _answer;
-	};
-
 	function _setAnswer(value) {
 		_answer = value;
 	}
+
+	this.getAnswer = function() {
+		return _answer;
+	};
 
 	// input calcString as a whitespace-seperated string, the first part of the string must be a number
 	// if calcString ends on an operation (e.g. "10 ^ 3 * 3 + "), it will be ignored.
@@ -67,9 +67,12 @@ function parsingCalculatorModule() {
 					calculation = _subtract;
 					break;
 				case "*":
+				case "x":
+				case "X":
 					calculation = _multiply;
 					break;
 				case "/":
+				case "÷":
 					calculation = _divide;
 					break;
 				case "^":
