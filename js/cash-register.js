@@ -78,12 +78,26 @@ window.onload = function() {
     }
 
     display.innerHTML = displayStr;
+    updateDisplay();
 
   }
 
   function updateDisplay() {
 
+    var displayStr = display.innerHTML;
+    var targetLength;
+
+    if (displayStr.length <= 27) {
+      targetLength = 30;
+    } else {
+      targetLength = display.length + 3;
     }
+
+    displayStr = displayStr.trim().replace(/\s/g, "_");
+
+    display.innerHTML = displayStr;
+
+  }
 
   function clearDisplay() {
       display.innerHTML = originalDisplayString;
