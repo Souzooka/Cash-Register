@@ -28,6 +28,7 @@ window.onload = function() {
     else if (isNaN(Number(str)) && (isNaN(Number(displayStr[displayStr.length-1])) && displayStr[displayStr.length-1] !== ".")) {
       if (str === ".") {
         displayStr += " 0.";
+        decimal = true;
       } else {
         alert("Error: Cannot add one operator after another or add an operator without an argument!");
         clearDisplay();
