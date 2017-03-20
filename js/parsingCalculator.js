@@ -3,6 +3,8 @@
 
 function parsingCalculatorModule() {
 
+	var _answer = 0;
+
 	function add(op1, op2) {
 		return op1 + op2;
 	}
@@ -23,8 +25,17 @@ function parsingCalculatorModule() {
 		return Math.pow(op1, op2);
 	}
 
+	this.getAnswer = () => {
+		return _answer;
+	}
+
+	function setAnswer(value) {
+		_answer = value;
+	}
+
 	// input calcString as a whitespace-seperated string, the first part of the string must be a number
-	this.calculate = function(calcString) {
+	// if calcString ends on an operation (e.g. "10 ^ 3 * 3 + "), it will be ignored.
+	this.calculate = (calcString) => {
 		var total;
 		var operator1;
 		var operator2;
@@ -73,10 +84,11 @@ function parsingCalculatorModule() {
 		}
 
 		total = numArr[0];
+		setAnswer(total);
 		return total;
 	};
 
-	this.calculatePEMDAS = function(calcString) {
+	this.calculatePEMDAS = (calcString) => {
 		// TODO
 		return calcString.split(" ");
 	};
@@ -86,5 +98,8 @@ function parsingCalculatorModule() {
 var calculator = new parsingCalculatorModule();
 var calculator2  = new parsingCalculatorModule();
 
-console.log(calculator.calculate("10 ^ 3 * 3"));
-console.log(calculator2.calculate("8 * 9 + 2 - 2 / 2"));
+calculator.calculate("10 ^ 3 * 3");
+calculator2.calculate("8 * 9 + 2 - 2 / 2");
+
+console.log(calculator.getAnswer());
+console.log(calculator2.getAnswer());
