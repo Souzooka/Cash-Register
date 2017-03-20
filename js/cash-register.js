@@ -97,6 +97,12 @@ window.onload = function() {
 
     displayStr = "[$" + displayStr;
 
+    while (displayStr.length < targetLength - 1) {
+      displayStr += "_";
+    }
+
+    displayStr += "]";
+
     display.innerHTML = displayStr;
 
   }
