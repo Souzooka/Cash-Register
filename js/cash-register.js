@@ -8,6 +8,7 @@ window.onload = function() {
   var display = document.getElementById("registerDisplay");
   var number = document.querySelectorAll("span.btn-number");
   var operation = document.querySelectorAll("span.btn-operation");
+  var storedMoney = 0;
 
   function addToDisplay(str) {
 
@@ -124,6 +125,21 @@ window.onload = function() {
     decimal = false;
     addToDisplay(calculator.getAnswer());
   });
+  document.querySelector("#buttonDeposit").addEventListener("click", function(){
+    var total = calculator.calculate(parseDisplay());
+    clearDisplay();
+    storedMoney += total;
+  });
+  document.querySelector("#buttonWithdraw").addEventListener("click", function(){
+    var total = calculator.calculate(parseDisplay());
+    clearDisplay();
+    storedMoney -= total;
+  });
+  document.querySelector("#buttonGetBalance").addEventListener("click", function(){
+    clearDisplay();
+    addToDisplay(String(storedMoney));
+  });
+
 
 
   display.innerHTML = originalDisplayString;
