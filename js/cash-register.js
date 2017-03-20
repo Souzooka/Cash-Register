@@ -115,6 +115,11 @@ window.onload = function() {
     decimal = false;
     addToDisplay(String(total));
   });
+  document.querySelector("#buttonAns").addEventListener("click", function(){
+    clearDisplay();
+    decimal = false;
+    addToDisplay(calculator.getAnswer());
+  });
 
 
   display.innerHTML = originalDisplayString;
